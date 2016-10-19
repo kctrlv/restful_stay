@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.feature "Visitor visits Homepage" do
-  scenario "visitor can see Create Account link and login form" do
+RSpec.feature "Visitor Signs Up" do
+  scenario "visitor can fill in sign up form" do
     # As a visitor
     # When I visit '/'
     visit '/'
@@ -17,22 +17,28 @@ RSpec.feature "Visitor visits Homepage" do
     fill_in "Last Name", with: "Clancey"
     # and I fill in "Email Address" with "cc007@gmail.com"
     fill_in "Email Address", with: "cc007@gmail.com"
-
     # and I fill in "Password" with "clanceytime"
-    # and I fill in "Birthdate" with "07/07/1907"
+    fill_in "Password", with: "clanceytime"
     # and I fill in phone number with "5551234567"
+    fill_in "Phone Number", with: '5551234567'
     # and I click "Submit"
+    click_button "Sign Up"
     #
     # then I should expect to be on '/confirmation'
-    # and my account should be created but inactive
+    expect(current_path).to eq("/confirmation")
+    # and my account should be created but inactive - tested seperately
     # And I should see instructions to enter my confirmation code
+    expect(page).to have_content("Please enter the confirmation code you received")
     # And I should have received a text message with a confirmation code
-    #
     # When I enter the confirmation code
+    fill_in "Code", with: 1234
     # And I click "Submit"
+    click_button "Confirm"
     # Then I should be redirected to "/dashboard"
+    expect(current_path).to eq("/dashboard")
     # And I should see a "Chad" in the navbar
-
-
+    within ".navbar" do
+      expect(page).to have_content("Chad")
+    end
   end
 end
