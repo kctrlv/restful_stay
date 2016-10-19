@@ -32,6 +32,7 @@ RSpec.feature "Visitor Signs Up" do
     # And I should have received a text message with a confirmation code
     # When I enter the confirmation code
     fill_in "Code", with: 1234
+
     # And I click "Submit"
     click_button "Confirm"
     # Then I should be redirected to "/dashboard"
