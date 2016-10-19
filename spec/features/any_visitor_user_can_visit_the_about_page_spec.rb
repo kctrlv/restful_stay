@@ -4,6 +4,7 @@ RSpec.feature "any visitor/user can visit the About page" do
   scenario "user can see visit about page" do
     #as a user (logged in)
     user = create(:user)
+    login_user(user)
     #when I click link "About"
     visit '/about'
 
