@@ -78,7 +78,7 @@ RSpec.configure do |config|
   def login_user(user)
     visit login_path
 
-    fill_in "Username", with: user.username
+    fill_in "Email", with: user.email_address
     fill_in "Password", with: user.password
     click_on "login-button"
   end
