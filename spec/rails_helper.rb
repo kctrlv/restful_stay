@@ -77,7 +77,6 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
   def login_user(user)
     visit login_path
-
     fill_in "Email", with: user.email_address
     fill_in "Password", with: user.password
     click_on "login-button"
