@@ -1,25 +1,31 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>RestfulStay</title>
-    <%= csrf_meta_tags %>
-    <link rel="stylesheet" href="/css/bootstrap.css">
+<head>
+  <title>RestfulStay</title>
+  <%= csrf_meta_tags %>
+  <link rel="stylesheet" href="/css/bootstrap.css">
 
 
-    <%= stylesheet_link_tag    'application', media: 'all' %>
-    <%= javascript_include_tag 'application' %>
-  </head>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+</head>
 
-  <body>
-    <script src="js/bootstrap.min.js"></script>
-    <div class="navbar navbar-default navbar-static-top">
-      <a href="/" class='navbar-brand'>RESTful_stay</a>
-      <ul class='nav navbar-nav navbar-right'>
+<body>
+  <script src="js/bootstrap.min.js"></script>
+  <div class="navbar navbar-default navbar-static-top", id: "navbar">
+    <a href="/" class='navbar-brand'>RESTful_stay</a>
+    <ul class='nav navbar-nav navbar-right'>
+      <% if current_user %>
+        <li> <%= link_to "Trips", login_path %> </li>
+        <li> <%= link_to "Messages", signup_path %> </li>
+        <li> <%= link_to "#{current_user.first_name}", about_path %> </li>
+      <% else %>
         <li> <%= link_to "Login", login_path %> </li>
         <li> <%= link_to "Sign Up", signup_path %> </li>
         <li> <%= link_to "About", about_path %> </li>
-      </ul>
-    </div>
-    <%= yield %>
-  </body>
+      <% end %>
+    </ul>
+  </div>
+  <%= yield %>
+</body>
 </html>
