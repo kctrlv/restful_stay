@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.feature "any visitor/user can visit the About page" do
   scenario "user can see visit about page" do
     #as a user (logged in)
-
+    user = create(:user)
+    binding.pry
     #when I click link "About"
     visit '/about'
 
