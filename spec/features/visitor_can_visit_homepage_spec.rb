@@ -23,13 +23,5 @@ RSpec.feature "Visitor visits Homepage" do
       expect(page).to have_css("img[src*='fort_collins']")
       expect(page).to have_css("img[src*='estes_park']")
     end
-
-    # I should see a dropdown of city options
-    expect(page).to have_select("cities_list", options: ["Colorado Springs",
-                                                         "Denver",
-                                                         "Boulder",
-                                                         "Grand Junction",
-                                                         "Fort Collins",
-                                                         "Estes Park"])
   end
 end
