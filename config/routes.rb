@@ -14,4 +14,10 @@ Rails.application.routes.draw do
   post 'confirmation', to: 'confirmation#create'
 
   get 'dashboard', to: 'dashboard#index'
+
+  get 'confirmation', to: 'confirmation#new'
+
+  delete 'logout', to: 'sessions#destroy'
+
+  get 'dashboard', to: 'dashboard#index'
 end
