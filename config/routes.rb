@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   root to: 'home#index'
 
-  resources :users, only: [:new, :show, :create]
+  resources :users, only: [:new, :create]
+  resources :listings, only: [:index, :new, :create]
+
+  resources :userroles, only: [:create]
+
   get 'signup', to: 'users#new'
 
   get 'about', to: 'about#index'
@@ -15,17 +19,4 @@ Rails.application.routes.draw do
   post 'confirmation', to: 'confirmation#create'
 
   get 'dashboard', to: 'dashboard#index'
-
-  get 'confirmation', to: 'confirmation#new'
-
-  delete 'logout', to: 'sessions#destroy'
-
-  get 'dashboard', to: 'dashboard#index'
-
-  get 'confirmation', to: 'confirmation#new'
-
-  delete 'logout', to: 'sessions#destroy'
-
-  get 'user_dashboard', to: 'dashboard#index'
-
 end

@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.feature "An existing user can login" do
   scenario "they can enter credentials and access their dashboard" do
 #  As a user with an existing account
-    user = create(:user)
+    user = create(:user, status: 'active')
 
 #  When I visit '/'
     visit '/'
