@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  protect_from_forgery
+
   def new
     @user = User.new
   end
@@ -8,7 +10,7 @@ class UsersController < ApplicationController
     if @user.save
       session[:user_id] = @user.id
       ConfirmationSender.send_confirmation_to(@user)
-      redirect_to confirmation_path
+      redirect_to confirmation_path(current_user)
     else
       render :new
     end

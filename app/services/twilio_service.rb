@@ -1,30 +1,32 @@
 require 'net/http'
+require 'uri'
 
 class TwilioService
 
   def self.code_generator
       connection
+      @code
   end
 
   def self.generate
-    rand(100000...999999).to_s
+    @code = rand(100000...999999).to_s
   end
 
   def self.connection
-    uri = URI("https://api.twilio.com/2010-04-01/Accounts/#{ENV['twilio_account_sid']}/Messages.json")
-    params = {Username: ENV['twilio_account_sid'],
-              Password: ENV['twilio_auth_token'],
-              To: ENV['to_number'] ,
-              From: ENV['from_number'],
-              Body: "Hello from RESTfulStay, Enter your code #{TwilioService.generate}"
-              }
-    uri.query = URI.encode_www_form(params)
+    url = URI("https://api.twilio.com/2010-04-01/Accounts/#{ENV['twilio_account_sid']}/Messages.json")
 
-    res = Net::HTTP.get_response(uri)
-    puts parse(res.body) if res.is_a?(Net::HTTP)
-  end
+    http = Net::HTTP.new(url.host, url.port)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
-  def parse(response)
-    JSON.parse(response, symbolize_names: true)
+    request = Net::HTTP::Post.new(url)
+    request["content-type"] = 'multipart/form-data; boundary=---011000010111000001101001'
+    request["authorization"] = ENV['authorization']
+    request["cache-control"] = 'no-cache'
+    request["postman-token"] = ENV['postman-token']
+    request.body = "-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"Body\"\r\n\r\nHello from RESTfulStay, Enter your code #{TwilioService.generate} to the confirmation page in our website\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"To\"\r\n\r\n#{ENV['to_number']}\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"From\"\r\n\r\n#{ENV['from_number']}\r\n-----011000010111000001101001--"
+
+    response = http.request(request)
+    puts response.read_body
   end
 end
