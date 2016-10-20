@@ -27,6 +27,6 @@ class TwilioService
     request.body = "-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"Body\"\r\n\r\nHello from RESTfulStay, Enter your code #{TwilioService.generate} to the confirmation page in our website\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"To\"\r\n\r\n#{ENV['to_number']}\r\n-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"From\"\r\n\r\n#{ENV['from_number']}\r\n-----011000010111000001101001--"
 
     response = http.request(request)
-    puts response.read_body
+    response.read_body
   end
 end
