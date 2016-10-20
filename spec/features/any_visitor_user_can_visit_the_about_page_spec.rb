@@ -7,10 +7,8 @@ RSpec.feature "any visitor/user can visit the About page" do
     login_user(user)
     #when I click link "About"
     visit '/about'
-
     #I expect my current path to be '/about'
     expect(current_path).to eq(about_path)
-
     #and I should see "Created by: David Davydov, Nate Anderson, Raphael Barbo, and Brian Heim"
     expect(page).to have_content("Created by: Brian Heim, David Davydov, Nate Anderson, and Raphael Barbo")
   end
@@ -19,10 +17,8 @@ RSpec.feature "any visitor/user can visit the About page" do
     #as a visitor (not logged)
     #when I click link "About"
     visit '/about'
-
     #I expect my current path to be '/about'
     expect(current_path).to eq(about_path)
-
     #and I should see "Created by: David Davydov, Nate Anderson, Raphael Barbo, and Brian Heim"
     expect(page).to have_content("Created by: Brian Heim, David Davydov, Nate Anderson, and Raphael Barbo")
   end
