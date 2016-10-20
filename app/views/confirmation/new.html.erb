@@ -1,0 +1,9 @@
+<h1>Please enter the confirmation code you received</h1>
+
+<%= form_tag confirmation_path(id: @user.id), method: :create do %>
+  <div class="form-group">
+    <%= label_tag :code %><br />
+    <%= number_field_tag :code, class: "form-control"  %>
+  </div>
+  <%= submit_tag 'Confirm', class: "btn btn-primary" %>
+<% end %>
