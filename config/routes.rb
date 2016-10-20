@@ -2,7 +2,10 @@ Rails.application.routes.draw do
   root to: 'home#index'
 
   resources :users, only: [:new, :create]
-  resources :listings, only: [:index]
+  resources :listings, only: [:index, :new, :create]
+
+  resources :userroles, only: [:create]
+
   get 'signup', to: 'users#new'
 
   get 'about', to: 'about#index'

@@ -31,13 +31,16 @@ class PermissionService
 
     def host_permissions
       # return true if controller == 'orders' && action.in?(%w(index show))
+      return true if controller == 'listings' && action.in?(%w(index new create))
       return traveler_permissions
     end
 
     def traveler_permissions
       # return true if controller == 'items' && action.in?(%w(index show))
-      return default_permissions
       return true if controller == 'dashboard' && action.in?(%w(index))
+      return true if controller == 'userroles' && action.in?(%w(create))
+
+      return guest_permissions
     end
 
     def guest_permissions

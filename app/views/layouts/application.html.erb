@@ -14,17 +14,7 @@
   <div class="navbar navbar-default navbar-static-top", id: "navbar">
     <a href="/" class='navbar-brand'>RESTful_stay</a>
     <ul class='nav navbar-nav navbar-right'>
-      <% if current_user %>
-        <li> <%= link_to "Trips", login_path %> </li>
-        <li> <%= link_to "Messages", signup_path %> </li>
-        <li> <%= link_to "#{current_user.first_name}" %> </li>
-        <li> <%= link_to "About", about_path %> </li>
-        <li> <%= link_to "Logout", logout_path, method: "delete" %> </li>
-      <% else %>
-        <li> <%= link_to "Login", login_path %> </li>
-        <li> <%= link_to "Sign Up", signup_path %> </li>
-        <li> <%= link_to "About", about_path %> </li>
-      <% end %>
+      <%= render partial: 'navbar' %>
     </ul>
   </div>
   <%= yield %>
