@@ -7,10 +7,8 @@ Rails.application.routes.draw do
 
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
-
-  get 'confirmation', to: 'confirmation#new'
-
   delete 'logout', to: 'sessions#destroy'
+  get 'confirmation', to: 'confirmation#new'
 
   get 'user_dashboard', to: 'dashboard#index'
 
