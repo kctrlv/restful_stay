@@ -9,7 +9,6 @@ class User < ApplicationRecord
 
   def activate
     update_attribute(:status, "active")
-    binding.pry
     roles << Role.find_by(name: "traveler")
   end
 

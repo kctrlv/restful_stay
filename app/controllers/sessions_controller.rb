@@ -6,7 +6,6 @@ class SessionsController < ApplicationController
     user = User.find_by(email_address: params[:session][:email_address])
     if user && user.authenticate(params[:session][:password])
       session[:user_id] = user.id
-      redirect_to dashboard_path
       if user.inactive?
         redirect_to confirmation_path
       else
