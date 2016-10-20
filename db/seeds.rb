@@ -3,12 +3,14 @@
 
 class Seed
   def self.start
+    UserRole.delete_all
+    User.delete_all
+    Role.delete_all
     generate_roles
     generate_users
   end
 
   def self.generate_roles
-    Role.delete_all
     Role.create(name: "traveler")
     Role.create(name: "host")
     Role.create(name: "admin")
@@ -16,13 +18,14 @@ class Seed
   end
 
   def self.generate_users
-    User.delete_all
     inactive =  User.create(first_name: 'Inactive',
                 last_name:  'Johnson',
                 email_address: 'inactive@restfulstay.com',
                 password: 'inactive',
                 status: 'inactive')
     puts "inactive user created"
+    inactive.roles << Role.find_by(name: 'traveler')
+
 
     traveler =  User.create(first_name: 'Traveler',
                 last_name:  'Johnson',
@@ -46,9 +49,9 @@ class Seed
                 email_address: 'admin@restfulstay.com',
                 password: 'admin',
                 status: 'active')
-    host.roles << Role.find_by(name: 'traveler')
-    host.roles << Role.find_by(name: 'host')
-    host.roles << Role.find_by(name: 'admin')
+    admin.roles << Role.find_by(name: 'traveler')
+    admin.roles << Role.find_by(name: 'host')
+    admin.roles << Role.find_by(name: 'admin')
     puts "admin user created"
   end
 end

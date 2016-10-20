@@ -9,6 +9,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
+      @user.roles << Role.find_by(name: "traveler")
       ConfirmationSender.send_confirmation_to(@user)
       redirect_to confirmation_path #removed (current_user)
     else

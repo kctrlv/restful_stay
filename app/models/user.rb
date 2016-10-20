@@ -9,18 +9,17 @@ class User < ApplicationRecord
 
   def activate
     update_attribute(:status, "active")
-    roles << Role.find_by(name: "traveler")
   end
 
   def traveler?
-    roles.exists?(name: 'traveler') && status != 'inactive'
+    roles.exists?(name: 'traveler')
   end
 
   def host?
-    roles.exists?(name: 'host') && status != 'inactive'
+    roles.exists?(name: 'host')
   end
 
   def admin?
-    roles.exists?(name: 'admin') && status != 'inactive'
+    roles.exists?(name: 'admin')
   end
 end

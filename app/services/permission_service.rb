@@ -39,7 +39,6 @@ class PermissionService
       # return true if controller == 'items' && action.in?(%w(index show))
       return true if controller == 'dashboard' && action.in?(%w(index))
       return true if controller == 'userroles' && action.in?(%w(create))
-
       return guest_permissions
     end
 
