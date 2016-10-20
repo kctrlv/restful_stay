@@ -13,5 +13,5 @@ Rails.application.routes.draw do
   get 'confirmation', to: 'confirmation#new'
   post 'confirmation', to: 'confirmation#create'
 
-  get 'user_dashboard', to: 'dashboard#index'
+  get 'dashboard', to: 'dashboard#index'
 end
