@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.feature "An existing user can login" do
   scenario "they can enter credentials and access their dashboard" do
 #  As a user with an existing account
-    user = create(:user)
+    user = create(:user, status: 'active')
 
 #  When I visit '/'
     visit '/'
@@ -24,7 +24,7 @@ RSpec.feature "An existing user can login" do
     click_button "Login"
 
 #  I expect current path "/dashboard"
-    expect(current_path).to eq("/user_dashboard")
+    expect(current_path).to eq("/dashboard")
 
 #  I expect to see "Trips" in the navbar
 #  I expect to see "Messages" in the navbar
