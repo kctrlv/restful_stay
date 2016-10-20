@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature "Visitor Signs Up" do
-  scenario "visitor can fill in sign up form" do
+  scenario "visitor can become an inactive user" do
     # As a visitor
     # When I visit '/'
     visit '/'
@@ -29,17 +29,22 @@ RSpec.feature "Visitor Signs Up" do
     # and my account should be created but inactive - tested seperately
     # And I should see instructions to enter my confirmation code
     expect(page).to have_content("Please enter the confirmation code you received")
-    # And I should have received a text message with a confirmation code
-    # When I enter the confirmation code
-    fill_in "Code", with: 1234
-
-    # And I click "Submit"
-    click_button "Confirm"
-    # Then I should be redirected to "/dashboard"
-    expect(current_path).to eq("/dashboard")
-    # And I should see a "Chad" in the navbar
-    within ".navbar" do
-      expect(page).to have_content("Chad")
-    end
   end
+
+  # scenario "visitor can confirm with two-factor auth" do
+  #   # As an inactive user
+  #
+  #   # And I should have received a text message with a confirmation code
+  #   # When I enter the confirmation code
+  #   fill_in "Code", with: 1234
+  #
+  #   # And I click "Submit"
+  #   click_button "Confirm"
+  #   # Then I should be redirected to "/dashboard"
+  #   expect(current_path).to eq("/dashboard")
+  #   # And I should see a "Chad" in the navbar
+  #   within ".navbar" do
+  #     expect(page).to have_content("Chad")
+  #   end
+  # end
 end
