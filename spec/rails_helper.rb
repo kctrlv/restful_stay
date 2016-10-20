@@ -6,6 +6,13 @@ require 'spec_helper'
 require 'rspec/rails'
 require 'capybara'
 require 'vcr'
+require 'simplecov'
+SimpleCov.start 'rails' do
+    add_filter "/app/channels"
+    add_filter "/app/jobs"
+    add_filter "/app/mailers"
+    add_filter "/app/helpers"
+end
 
 VCR.configure do |config|
   config.cassette_library_dir = "spec/fixtures/vcr_cassettes"
