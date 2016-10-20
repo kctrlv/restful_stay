@@ -1,6 +1,10 @@
 class ConfirmationController < ApplicationController
   def new
-    @user = current_user
+    if current_user
+      @user = current_user
+    else
+      render_404
+    end
   end
 
   def create

@@ -7,6 +7,6 @@ FactoryGirl.define do
     phone_number Faker::PhoneNumber.cell_phone
     description Faker::Lorem.paragraph
     picture_url Faker::Avatar.image
-    status "active"
+    status "inactive"
   end
 end

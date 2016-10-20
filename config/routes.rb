@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   root to: 'home#index'
 
-  resources :users, only: [:new, :show, :create]
+  resources :users, only: [:new, :create]
+  resources :listings, only: [:index]
   get 'signup', to: 'users#new'
 
   get 'about', to: 'about#index'
@@ -13,5 +14,5 @@ Rails.application.routes.draw do
   get 'confirmation', to: 'confirmation#new'
   post 'confirmation', to: 'confirmation#create'
 
-  get 'user_dashboard', to: 'dashboard#index'
+  get 'dashboard', to: 'dashboard#index'
 end
