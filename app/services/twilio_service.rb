@@ -2,9 +2,8 @@ require 'net/http'
 
 class TwilioService
 
-  def send_confirmation_code
-      uri = URI("https://api.twilio.com/2010-04-01/Accounts/#{ENV['twilio_account_sid']}/Messages.json")
-      connection.get uri
+  def self.code_generator
+      connection
   end
 
   def self.generate
@@ -12,6 +11,7 @@ class TwilioService
   end
 
   def self.connection
+    uri = URI("https://api.twilio.com/2010-04-01/Accounts/#{ENV['twilio_account_sid']}/Messages.json")
     params = {Username: ENV['twilio_account_sid'],
               Password: ENV['twilio_auth_token'],
               To: ENV['to_number'] ,
