@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     if @user.save
       session[:user_id] = @user.id
       ConfirmationSender.send_confirmation_to(@user)
-      redirect_to confirmation_path(current_user)
+      redirect_to confirmation_path #removed (current_user)
     else
       render :new
     end
