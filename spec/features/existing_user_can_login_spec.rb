@@ -24,7 +24,7 @@ RSpec.feature "An existing user can login" do
     click_button "Login"
 
 #  I expect current path "/dashboard"
-    expect(current_path).to eq("/dashboard")
+    expect(current_path).to eq("/")
 
 #  I expect to see "Trips" in the navbar
 #  I expect to see "Messages" in the navbar

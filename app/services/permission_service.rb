@@ -39,7 +39,8 @@ class PermissionService
       # return true if controller == 'items' && action.in?(%w(index show))
       return true if controller == 'dashboard' && action.in?(%w(index))
       return true if controller == 'userroles' && action.in?(%w(create))
-
+      return true if controller == 'profiles' && action.in?(%w(edit))
+      return true if controller == 'users' && action.in?(%w(update))
       return guest_permissions
     end
 
@@ -51,6 +52,7 @@ class PermissionService
       return true if controller == 'sessions' && action.in?(%w(new create destroy))
       return true if controller == 'users' && action.in?(%w(new create))
       return true if controller == 'confirmation' && action.in?(%w(new create))
+      return true if controller == 'profiles' && action.in?(%w(show))
     end
 
 end

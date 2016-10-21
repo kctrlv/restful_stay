@@ -15,6 +15,14 @@ class UsersController < ApplicationController
       render :new
     end
   end
+  
+  def update 
+    if current_user.update(user_params)
+      redirect_to profile_show_path(current_user)
+    else
+      render :edit
+    end
+  end
 
   private
 
