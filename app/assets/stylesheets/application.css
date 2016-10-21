@@ -40,5 +40,32 @@
   width: auto;
 }
 
+body {
+  background-image: url(http://wildluxe.com/wp-content/uploads/2014/09/IX8A3094.jpg);
+}
 
+.cities {
+  opacity: 0.95;
+}
 
+.city_search {
+  opacity: 0.95;
+}
+
+.login {
+  opacity: 0.95;
+}
+
+.sign_up {
+  opacity: 0.95;
+}
+
+.about {
+  opacity: 0.90;
+}
+
+.navbar {
+  border-color: #581845;
+  background-color: #581845;
+  opacity: 0.95;
+}

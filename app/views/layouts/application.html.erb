@@ -11,17 +11,23 @@
 
 <body>
   <script src="js/bootstrap.min.js"></script>
-  <div class="navbar navbar-default navbar-static-top", id: "navbar">
-    <a href="/" class='navbar-brand'>RESTful_stay</a>
-    <ul class='nav navbar-nav navbar-right'>
-      <%= render partial: 'navbar' %>
-    </ul>
+  <div class="container-fluid">
+    <div class="navbar navbar-default navbar-static-top", id: "navbar">
+        <a href="/" class='navbar-brand'>RESTful_stay</a>
+        <ul class="nav navbar-nav navbar-right">
+          <%= render partial: 'navbar' %>
+        </ul>
+    </div>
   </div>
+  <div class="container-fuid">
     <% flash.each do |type, message| %>
-      <div class="alert alert-<%= type %>">
-        <%= message %>
-      </div>
+    <div class="alert alert-<%= type %>">
+      <%= message %>
+    </div>
     <% end %>
-  <%= yield %>
+  </div>
+  <div class="container-fluid">
+    <%= yield %>
+  </div>
 </body>
 </html>
