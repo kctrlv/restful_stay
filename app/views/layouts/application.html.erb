@@ -12,20 +12,15 @@
 <body>
   <script src="js/bootstrap.min.js"></script>
   <div class="container-fluid">
-    <div class="navbar navbar-default navbar-static-top", id: "navbar">
-        <a href="/" class='navbar-brand'>RESTful_stay</a>
-        <ul class="nav navbar-nav navbar-right">
-          <%= render partial: 'navbar' %>
-        </ul>
-    </div>
+      <%= render partial: 'navbar' %>
   </div>
-  <div class="container-fuid">
     <% flash.each do |type, message| %>
+    <div class="container-fuid">
     <div class="alert alert-<%= type %>">
       <%= message %>
     </div>
-    <% end %>
   </div>
+    <% end %>
   <div class="container-fluid">
     <%= yield %>
   </div>

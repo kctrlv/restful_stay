@@ -20,7 +20,7 @@
 }*/
 
 .img-responsive {
-  display: block;
+  display: inline-block;
   max-width: 100%;
   height: auto;
 }
@@ -42,14 +42,35 @@
 
 body {
   background-image: url(http://wildluxe.com/wp-content/uploads/2014/09/IX8A3094.jpg);
+  font-family: fantasy;
 }
 
 .cities {
   opacity: 0.95;
+  background-color: #3c3c3c;
+  padding: 20px;
 }
 
 .city_search {
   opacity: 0.95;
+  background-color: #00a99d;
+  padding: 10px;
+  margin-bottom: 175px;
+}
+
+.welcome {
+  opacity: 0.90;
+  background-color: #00a99d;
+}
+
+.dropdown {
+  display: inline-block;
+  padding: 10px;
+}
+
+.dropdown-menu {
+  position: sticky;
+  z-index: 9999;
 }
 
 .login {
@@ -62,10 +83,55 @@ body {
 
 .about {
   opacity: 0.90;
+  background-color: #00a99d;
+}
+
+.well-md {
+  background-color: #3c3c3c;
+  color: #f3fb7d;
+  border-color: #3c3c3c;
 }
 
 .navbar {
-  border-color: #581845;
-  background-color: #581845;
+  border-color: #3c3c3c;
+  background-color: #3c3c3c;
   opacity: 0.95;
+}
+
+.navbar-default .navbar-brand{
+  color: #00a99d;
+  /*font-family: fantasy;*/
+  font-size: 25px;
+}
+
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+    color: #f3fb7d;
+}
+
+.navbar-default .navbar-nav > li > a {
+  color: #00a99d;
+  padding-left: 10px;
+  /*font-family: fantasy;*/
+  font-size: 20px;
+}
+
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color: #f3fb7d;
+}
+
+.btn-primary {
+  background-color: #00a99d;
+  border-color: #00a99d;
+}
+
+.btn-primary:hover {
+  background-color: #f3fb7d;
+  border-color: #f3fb7d;
+  color: #3c3c3c;
+}
+
+.about_text {
+  /*font-family: fantasy;*/
 }
