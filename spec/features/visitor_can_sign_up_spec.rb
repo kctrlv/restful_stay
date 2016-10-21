@@ -59,21 +59,4 @@ RSpec.feature "Visitor Signs Up" do
       #since it will re-render new
       expect(current_path).to eq("/signup")
   end
-
-  # scenario "visitor can confirm with two-factor auth" do
-  #   # As an inactive user
-  #
-  #   # And I should have received a text message with a confirmation code
-  #   # When I enter the confirmation code
-  #   fill_in "Code", with: 1234
-  #
-  #   # And I click "Submit"
-  #   click_button "Confirm"
-  #   # Then I should be redirected to "/dashboard"
-  #   expect(current_path).to eq("/dashboard")
-  #   # And I should see a "Chad" in the navbar
-  #   within ".navbar" do
-  #     expect(page).to have_content("Chad")
-  #   end
-  # end
 end
