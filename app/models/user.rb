@@ -1,5 +1,12 @@
 class User < ApplicationRecord
   has_secure_password
+
+  validates :first_name, presence: true, length: { minimum: 2 }
+  validates :last_name, presence: true, length: { minimum: 2 }
+  validates :password, length: { in: 6..20 }
+  validates :email_address, presence: true #we need to add uniqueness for the email address
+  validates_format_of :email_address, :with => /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/
+
   has_many :user_roles
   has_many :roles, through: :user_roles
 
