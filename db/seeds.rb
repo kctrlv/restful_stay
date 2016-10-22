@@ -29,6 +29,16 @@ class Seed
       City.create(name: city)
     end
     puts "Created Cities: #{cities.join(', ')}"
+    assign_thumbnails_to_cities
+  end
+
+  def self.assign_thumbnails_to_cities
+    City.find_by(name: "Colorado Springs").update_attribute(:image_url, 'http://i.imgur.com/tXmWxkR.png')
+    City.find_by(name: "Boulder").update_attribute(:image_url,          'http://i.imgur.com/0XdzpFJ.png')
+    City.find_by(name: "Denver").update_attribute(:image_url,           'http://i.imgur.com/9oz5DKZ.png')
+    City.find_by(name: "Estes Park").update_attribute(:image_url,       'http://i.imgur.com/mWmqdS1.png')
+    City.find_by(name: "Grand Junction").update_attribute(:image_url,   'http://i.imgur.com/vdy9zmE.png')
+    City.find_by(name: "Fort Collins").update_attribute(:image_url,     'http://i.imgur.com/DHopfr6.png')
   end
 
   def self.generate_roles

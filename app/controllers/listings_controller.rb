@@ -7,7 +7,6 @@ class ListingsController < ApplicationController
   end
 
   def create
-    # byebug
     @listing = Listing.make(listing_params, current_user.id)
     if @listing.save
       flash[:success] = "Your listing was created"

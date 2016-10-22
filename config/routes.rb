@@ -3,11 +3,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:new, :create]
   resources :listings, only: [:index, :new, :create, :show]
-  resources :cities, param: :name, only: [:show] do
-    resources :listings, only: [:index]
-  end
-
-
+  resources :cities, param: :city_name, only: [:show]
   resources :userroles, only: [:create]
 
   get 'signup', to: 'users#new'
