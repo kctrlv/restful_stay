@@ -66,9 +66,9 @@ RSpec.feature "Traveler Can View and Edit Their Profile" do
     expect(current_path).to eq("/dashboard/#{user.id}/edit")
     
     fill_in "First Name", with: "Bob"
+    fill_in "Password", with: user.password
     click_on "Update My Profile"
     expect(current_path).to eq("/profile/#{user.id}")
     expect(page).to have_content("Bob")
-    
   end
 end

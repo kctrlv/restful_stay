@@ -22,7 +22,7 @@ class Seed
                 last_name:  'Johnson',
                 email_address: 'inactive@restfulstay.com',
                 password: 'inactive',
-                phone_number: "+15049065326",
+                phone_number: "+00000000000",
                 status: 'inactive')
     puts "inactive user created"
     inactive.roles << Role.find_by(name: 'traveler')
@@ -32,7 +32,7 @@ class Seed
                 last_name:  'Johnson',
                 email_address: 'traveler@restfulstay.com',
                 password: 'traveler',
-                phone_number: "+15049065326",
+                phone_number: "+00000000000",
                 status: 'active')
     traveler.roles << Role.find_by(name: 'traveler')
     puts "traveler user created"
@@ -41,7 +41,7 @@ class Seed
                 last_name:  'Johnson',
                 email_address: 'host@restfulstay.com',
                 password: 'host',
-                phone_number: "+15049065326",
+                phone_number: "+00000000000",
                 status: 'active')
     host.roles << Role.find_by(name: 'traveler')
     host.roles << Role.find_by(name: 'host')
@@ -50,7 +50,7 @@ class Seed
     admin =     User.create(first_name: 'Admin',
                 last_name:  'Johnson',
                 email_address: 'admin@restfulstay.com',
-                phone_number: "+15049065326",
+                phone_number: "+00000000000",
                 password: 'admin',
                 status: 'active')
     admin.roles << Role.find_by(name: 'traveler')
