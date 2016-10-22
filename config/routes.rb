@@ -19,4 +19,7 @@ Rails.application.routes.draw do
   post 'confirmation', to: 'confirmation#create'
 
   get 'dashboard', to: 'dashboard#index'
+  patch 'dashboard/:user_id', to: 'users#update'
+  get 'dashboard/:user_id/edit', to: 'dashboard#edit', as: 'dashboard_edit'
+  get 'profile/:user_id', to: 'users#show', as: 'profile_show'
 end
