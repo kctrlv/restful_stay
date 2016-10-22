@@ -11,10 +11,10 @@
 
 <body>
   <script src="js/bootstrap.min.js"></script>
-  <div class="container-fluid">
-      <%= render partial: 'navbar' %>
-  </div>
-    <% flash.each do |type, message| %>
+  <%= render partial: 'navbar' %>
+    <div class="container-fluid">
+      <% flash.each do |type, message| %>
+    </div>
     <div class="container-fuid">
     <div class="alert alert-<%= type %>">
       <%= message %>
@@ -25,4 +25,7 @@
     <%= yield %>
   </div>
 </body>
+<footer>
+
+</footer>
 </html>
