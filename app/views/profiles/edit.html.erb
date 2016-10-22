@@ -1,9 +1,0 @@
-<h1>Edit Your Profile</h1>
-
-<%= form_for @user, :url => {:controller => :users, :action => :update}, :method => :patch do |f| %>
-  <%= f.text_field :first_name, placeholder: "First Name" %>
-  <%= f.text_field :last_name, placeholder: "Last Name" %>
-  <%= f.text_field :description, placeholder: "Description" %>
-  <%= f.text_field :picture_url, placeholder: "Picture URL" %>
-  <%= f.submit "Update My Profile" %>
-<% end %>

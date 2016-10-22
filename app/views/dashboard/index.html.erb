@@ -4,5 +4,5 @@
 
 <h1>Trips: </h1>
 
-<%= link_to "Edit Profile", profile_edit_path(user_id: @user.id) %></br>
-<%= link_to "View Profile", profile_show_path(user_id: @user.id) %>
+<%= link_to "Edit Profile", dashboard_edit_path(user_id: current_user.id) %></br>
+<%= link_to "View Profile", profile_show_path(user_id: current_user.id) %>
