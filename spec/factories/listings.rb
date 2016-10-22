@@ -5,6 +5,6 @@ FactoryGirl.define do
     image_url Faker::Avatar.image
     price_per_night Faker::Number.decimal(2)
     city
-    user
+    host
   end
 end

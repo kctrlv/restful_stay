@@ -7,9 +7,20 @@ class Seed
     User.delete_all
     Role.delete_all
     City.delete_all
+    Day.delete_all
     generate_roles
     generate_users
     generate_cities
+    generate_days
+  end
+
+  def self.generate_days
+    first_day = Date.parse('22-10-2016')
+    days = first_day..first_day.next_year
+    days.each do |day|
+      Day.create(date: day)
+    end
+    puts "Created Days: October 22, 2016 through October 22, 2017"
   end
 
   def self.generate_cities

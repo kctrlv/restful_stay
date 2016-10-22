@@ -33,8 +33,8 @@ RSpec.feature "Host creates listing" do
     fill_in "Price per night", with: 39.00
 
     # When I fill in dates available?
-    select "2016-05-06", from: "date_start"
-    select "2016-05-20", from: "date_end"
+    select "2016-11-06", from: "listing_start_date"
+    select "2016-11-20", from: "listing_end_date"
 
     # When I click on "Create Listing"
     click_button "Create Listing"
