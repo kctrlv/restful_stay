@@ -6,57 +6,63 @@ class Seed
     UserRole.delete_all
     User.delete_all
     Role.delete_all
+    City.delete_all
+    Day.delete_all
     generate_roles
     generate_users
+    generate_cities
+    generate_days
+  end
+
+  def self.generate_days
+    first_day = Date.parse('22-10-2016')
+    days = first_day..first_day.next_year
+    days.each do |day|
+      Day.create(date: day)
+    end
+    puts "Created Days: October 22, 2016 through October 22, 2017"
+  end
+
+  def self.generate_cities
+    cities = ["Colorado Springs", "Denver", "Boulder", "Grand Junction", "Fort Collins", "Estes Park"]
+    cities.each do |city|
+      City.create(name: city)
+    end
+    puts "Created Cities: #{cities.join(', ')}"
   end
 
   def self.generate_roles
-    Role.create(name: "traveler")
-    Role.create(name: "host")
-    Role.create(name: "admin")
-    puts "Roles created for traveler, host, admin"
+    roles = ['traveler', 'host', 'admin']
+    roles.each do |role|
+      Role.create(name: role)
+    end
+    puts "Created Roles: #{roles.join(', ')}"
   end
 
   def self.generate_users
-    inactive =  User.create(first_name: 'Inactive',
-                last_name:  'Johnson',
-                email_address: 'inactive@restfulstay.com',
-                password: 'inactive',
-                phone_number: "+00000000000",
-                status: 'inactive')
-    puts "inactive user created"
-    inactive.roles << Role.find_by(name: 'traveler')
+    users = ['inactive', 'traveler', 'host', 'admin']
+    users.each do |user|
+      status = "active"
+      status = "inactive" if user == 'inactive'
+      User.create(first_name: user.capitalize,
+                  last_name:  "Johnson",
+                  email_address: "#{user}@restfulstay.com",
+                  phone_number: "+10000000000",
+                  password: user,
+                  status: status)
+    end
+    puts "Created Users: #{users.join(', ')}"
+    assign_roles
+  end
 
-
-    traveler =  User.create(first_name: 'Traveler',
-                last_name:  'Johnson',
-                email_address: 'traveler@restfulstay.com',
-                password: 'traveler',
-                phone_number: "+00000000000",
-                status: 'active')
-    traveler.roles << Role.find_by(name: 'traveler')
-    puts "traveler user created"
-
-    host =      User.create(first_name: 'Host',
-                last_name:  'Johnson',
-                email_address: 'host@restfulstay.com',
-                password: 'host',
-                phone_number: "+00000000000",
-                status: 'active')
-    host.roles << Role.find_by(name: 'traveler')
-    host.roles << Role.find_by(name: 'host')
-    puts "host user created"
-
-    admin =     User.create(first_name: 'Admin',
-                last_name:  'Johnson',
-                email_address: 'admin@restfulstay.com',
-                phone_number: "+00000000000",
-                password: 'admin',
-                status: 'active')
-    admin.roles << Role.find_by(name: 'traveler')
-    admin.roles << Role.find_by(name: 'host')
-    admin.roles << Role.find_by(name: 'admin')
-    puts "admin user created"
+  def self.assign_roles
+    User.find_by(first_name: "Inactive").roles << Role.find_by(name: 'traveler')
+    User.find_by(first_name: "Traveler").roles << Role.find_by(name: 'traveler')
+    User.find_by(first_name: "Host").roles << Role.find_by(name: 'traveler')
+    User.find_by(first_name: "Host").roles << Role.find_by(name: 'host')
+    User.find_by(first_name: "Admin").roles << Role.find_by(name: 'traveler')
+    User.find_by(first_name: "Admin").roles << Role.find_by(name: 'host')
+    User.find_by(first_name: "Admin").roles << Role.find_by(name: 'admin')
   end
 end
 

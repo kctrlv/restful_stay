@@ -2,7 +2,11 @@ Rails.application.routes.draw do
   root to: 'home#index'
 
   resources :users, only: [:new, :create]
-  resources :listings, only: [:index, :new, :create]
+  resources :listings, only: [:index, :new, :create, :show]
+  resources :cities, param: :name, only: [:show] do
+    resources :listings, only: [:index]
+  end
+
 
   resources :userroles, only: [:create]
 

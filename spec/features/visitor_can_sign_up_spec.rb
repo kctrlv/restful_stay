@@ -13,15 +13,15 @@ RSpec.feature "Visitor Signs Up" do
       # I expect to see a form
       expect(page).to have_css('form')
       # and I fill in "First Name" with "Chad"
-      fill_in "First Name", with: "Chad"
+      fill_in "First name", with: "Chad"
       # and I fill in "Last Name" with "Clancey"
-      fill_in "Last Name", with: "Clancey"
+      fill_in "Last name", with: "Clancey"
       # and I fill in "Email Address" with "cc007@gmail.com"
-      fill_in "Email Address", with: "cc007@gmail.com"
+      fill_in "Email address", with: "cc007@gmail.com"
       # and I fill in "Password" with "clanceytime"
       fill_in "Password", with: "clanceytime"
       # and I fill in phone number with "5551234567"
-      fill_in "Phone Number", with: '5551234567'
+      fill_in "Phone number", with: '5551234567'
       # and I click "Submit"
       click_button "Sign Up"
       # then I should expect to be on '/confirmation'
@@ -43,15 +43,15 @@ RSpec.feature "Visitor Signs Up" do
       # I expect to see a form
       expect(page).to have_css('form')
       # and I fill in "First Name" with "Chad"
-      fill_in "First Name", with: ""
+      fill_in "First name", with: ""
       # and I fill in "Last Name" with "Clancey"
-      fill_in "Last Name", with: ""
+      fill_in "Last name", with: ""
       # and I fill in "Email Address" with "cc007@gmail.com"
-      fill_in "Email Address", with: "blahblahblah"
+      fill_in "Email address", with: "blahblahblah"
       # and I fill in "Password" with "clanceytime"
       fill_in "Password", with: "clanceytime"
       # and I fill in phone number with "5551234567"
-      fill_in "Phone Number", with: '5551234567'
+      fill_in "Phone number", with: '5551234567'
       # and I click "Submit"
       click_button "Sign Up"
       #
