@@ -9,13 +9,17 @@ class ListingsController < ApplicationController
   def create
     # byebug
     @listing = Listing.make(listing_params, current_user.id)
-    # if listing.save
-    #   flash.now[:success] = "Your listing was created"
-    #   redirect_to listing
-    # else
-    #   flash.now[:danger] = "Your listing was not created because of bad parameters"
-    #   render :new
-    # end
+    if @listing.save
+      flash[:success] = "Your listing was created"
+      redirect_to @listing
+    else
+      flash.now[:danger] = "Your listing was not created because of bad parameters"
+      render :new
+    end
+  end
+
+  def show
+    @listing = Listing.find(params[:id])
   end
 
   private

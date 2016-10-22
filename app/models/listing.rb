@@ -13,8 +13,8 @@ class Listing < ApplicationRecord
     date_range = params.delete(:start_date)..params.delete(:end_date)
     days = date_range.to_a.map{ |day_id| Day.find(day_id) }
     listing = Listing.new(params.merge(host_id: user_id))
-
-    byebug
+    listing.days << days
+    return listing
   end
 
   def start_date

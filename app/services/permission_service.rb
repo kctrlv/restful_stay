@@ -31,7 +31,7 @@ class PermissionService
 
     def host_permissions
       # return true if controller == 'orders' && action.in?(%w(index show))
-      return true if controller == 'listings' && action.in?(%w(index new create))
+      return true if controller == 'listings' && action.in?(%w(index new create show))
       return traveler_permissions
     end
 
