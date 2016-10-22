@@ -47,6 +47,7 @@ class Seed
       User.create(first_name: user.capitalize,
                   last_name:  "Johnson",
                   email_address: "#{user}@restfulstay.com",
+                  phone_number: "+10000000000",
                   password: user,
                   status: status)
     end
