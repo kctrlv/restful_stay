@@ -9,4 +9,12 @@ class DashboardController < ApplicationController
       render_404
     end
   end
+  
+  def edit
+    if current_user
+      @user = current_user
+    else
+      render_404
+    end
+  end
 end
