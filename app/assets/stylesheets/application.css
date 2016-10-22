@@ -19,26 +19,136 @@
   height: 33.33333%;
 }*/
 
-.img-responsive {
-  display: block;
-  max-width: 100%;
+.img-thumbnail {
+  display: inline-block;
+  width: auto;
   height: auto;
 }
 
-.thumbnail {
+.img-thumbnail {
   width: 200px;
   height: 200px;
-  overflow:hidden;
+  overflow: hidden;
   border-radius: 5px;
   border: 2px solid black;
 }
 
-.thumbnail img {
-  min-height: 100%;
-  min-width: 100%;
-  height: auto;
-  width: auto;
+.img-thumbnail img {
+  width: 187px;
+  height: 187px;
 }
 
+.col-sm-4 {
+  padding: 10px;
+}
 
+body {
+  /*background-image: url(http://wildluxe.com/wp-content/uploads/2014/09/IX8A3094.jpg);*/
+  font-family: fantasy;
+}
 
+.cities {
+  opacity: 0.95;
+  background-color: #3c3c3c;
+  background-color: transparent;
+  padding: 20px;
+}
+
+.city_search {
+  opacity: 0.95;
+  background-color: #00a99d;
+  padding: 10px;
+  margin-bottom: 175px;
+}
+
+.welcome > h2 {
+  opacity: 0.90;
+  color: #000000;
+  padding-bottom: 20px;
+}
+
+.welcome > p {
+  opacity: 0.90;
+  color: #00a99d;
+  font-size: 20px;
+  padding-bottom: 20px;
+}
+
+.dropdown {
+  display: inline-block;
+  padding: 10px;
+}
+
+.dropdown-menu {
+  position: sticky;
+  z-index: 9999;
+}
+
+.login {
+  opacity: 0.95;
+}
+
+.sign_up {
+  opacity: 0.95;
+}
+
+.about {
+  margin-top:50px;
+  margin-bottom:200px;
+  border-style:solid;
+  opacity: 0.90;
+  border-color: #00a99d;
+}
+
+.well-md {
+  /*background-color: #3c3c3c;*/
+  border-style:solid;
+  color: #3c3c3c;
+  border-color: #3c3c3c;
+}
+
+.navbar {
+  border-color: #3c3c3c;
+  border-style:solid;
+  /*background-color: #3c3c3c;*/
+  opacity: 0.95;
+}
+
+.navbar-default .navbar-brand{
+  color: #00a99d;
+  /*font-family: fantasy;*/
+  font-size: 25px;
+}
+
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+    color: #b29f67;
+}
+
+.navbar-default .navbar-nav > li > a {
+  color: #00a99d;
+  padding-left: 10px;
+  /*font-family: fantasy;*/
+  font-size: 20px;
+}
+
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color: ##b29f67;
+}
+
+.btn-primary, .btn-default {
+  background-color: #00a99d;
+  border-color: #00a99d;
+}
+
+#login-button {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.btn-primary:hover, .btn-default:hover {
+  background-color: #b29f67;
+  border-color: #b29f67;
+  color: #3c3c3c;
+}
