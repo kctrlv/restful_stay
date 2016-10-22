@@ -19,8 +19,7 @@ Rails.application.routes.draw do
   post 'confirmation', to: 'confirmation#create'
 
   get 'dashboard', to: 'dashboard#index'
-  
-  get 'profile/:user_id', to: 'profiles#show', as: 'profile_show'
-  get 'profile/:user_id/edit', to: 'profiles#edit', as: 'profile_edit'
-  patch 'profile/:user_id', to: 'users#update'
+  patch 'dashboard/:user_id', to: 'users#update'
+  get 'dashboard/:user_id/edit', to: 'dashboard#edit', as: 'dashboard_edit'
+  get 'profile/:user_id', to: 'users#show', as: 'profile_show'
 end
