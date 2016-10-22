@@ -31,7 +31,7 @@ RSpec.feature "Traveler Can View and Edit Their Profile" do
     expect(page).to have_link("View Profile")
     # When I click on "View Profile"
     click_link "View Profile"
-    # I expect my path to be "/profile/:user_id"
+    # I expect my path to be "/dashboard/:user_id"
     expect(current_path).to eq("/profile/#{user.id}")
     # I expect to see my profile image 
     expect(page).to have_css("img[src=\"#{user.picture_url}\"]")
@@ -62,13 +62,12 @@ RSpec.feature "Traveler Can View and Edit Their Profile" do
     expect(page).to have_link("Edit Profile")
     # When I click on "Edit Profile"
     click_link "Edit Profile"
-    # I expect my path to be "/profile/:user_id"
-    expect(current_path).to eq("/profile/#{user.id}/edit")
+    # I expect my path to be "/dashboard/:user_id"
+    expect(current_path).to eq("/dashboard/#{user.id}/edit")
     
     fill_in "First Name", with: "Bob"
     click_on "Update My Profile"
     expect(current_path).to eq("/profile/#{user.id}")
-    save_and_open_page
     expect(page).to have_content("Bob")
     
   end

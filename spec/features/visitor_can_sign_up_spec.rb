@@ -24,7 +24,6 @@ RSpec.feature "Visitor Signs Up" do
       fill_in "Phone Number", with: '5551234567'
       # and I click "Submit"
       click_button "Sign Up"
-      #
       # then I should expect to be on '/confirmation'
       expect(current_path).to eq("/confirmation")
       # and my account should be created but inactive - tested seperately
@@ -33,20 +32,31 @@ RSpec.feature "Visitor Signs Up" do
     end
   end
 
-  # scenario "visitor can confirm with two-factor auth" do
-  #   # As an inactive user
-  #
-  #   # And I should have received a text message with a confirmation code
-  #   # When I enter the confirmation code
-  #   fill_in "Code", with: 1234
-  #
-  #   # And I click "Submit"
-  #   click_button "Confirm"
-  #   # Then I should be redirected to "/dashboard"
-  #   expect(current_path).to eq("/dashboard")
-  #   # And I should see a "Chad" in the navbar
-  #   within ".navbar" do
-  #     expect(page).to have_content("Chad")
-  #   end
-  # end
+  scenario "visitor cannot signup without all attributes" do
+      # As a visitor
+      # When I visit '/'
+      visit '/'
+      # and I click link to "Sign Up"
+      click_link "Sign Up"
+      # I expect current path to be '/signup'
+      expect(current_path).to eq("/signup")
+      # I expect to see a form
+      expect(page).to have_css('form')
+      # and I fill in "First Name" with "Chad"
+      fill_in "First Name", with: ""
+      # and I fill in "Last Name" with "Clancey"
+      fill_in "Last Name", with: ""
+      # and I fill in "Email Address" with "cc007@gmail.com"
+      fill_in "Email Address", with: "blahblahblah"
+      # and I fill in "Password" with "clanceytime"
+      fill_in "Password", with: "clanceytime"
+      # and I fill in phone number with "5551234567"
+      fill_in "Phone Number", with: '5551234567'
+      # and I click "Submit"
+      click_button "Sign Up"
+      #
+      # then I should expect to be on '/signup path again'
+      #since it will re-render new
+      expect(current_path).to eq("/signup")
+  end
 end
