@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
       if user.inactive?
         redirect_to confirmation_path
       else
-        redirect_to dashboard_path
+        redirect_to root_path
       end
     else
       flash.now[:danger] = "Email and/or Password is invalid, please try again."
