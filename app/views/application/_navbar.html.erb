@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="navbar navbar-default navbar-static-top", id: "navbar">
   <a href="/" class='navbar-brand'>RESTful_stay</a>
     <div class="container-fluid">
@@ -16,25 +17,25 @@
             <li><a href="#">Estes Park</a></li>
           </ul>
         </div>
-      <% if current_user && current_user.host? %>
-        <li> <%= link_to "Listings", listings_path %> </li>
-        <li> <%= link_to "Trips", login_path %> </li>
-        <li> <%= link_to "Messages", signup_path %> </li>
-        <li> <%= link_to "#{current_user.first_name}" %> </li>
-        <li> <%= link_to "About", about_path %> </li>
-        <li> <%= link_to "Logout", logout_path, method: "delete" %> </li>
-      <% elsif current_user %>
-        <li> <%= link_to "Become a Host", userroles_path(become: 'host'), method: "post" %> </li>
-        <li> <%= link_to "Trips", login_path %> </li>
-        <li> <%= link_to "Messages", signup_path %> </li>
-        <li> <%= link_to "#{current_user.first_name}" %> </li>
-        <li> <%= link_to "About", about_path %> </li>
-        <li> <%= link_to "Logout", logout_path, method: "delete" %> </li>
-      <% else %>
-        <li> <%= link_to "Login", login_path %> </li>
-        <li> <%= link_to "Sign Up", signup_path %> </li>
-        <li> <%= link_to "About", about_path %> </li>
-      <% end %>
+        <% if current_user && current_user.host? %>
+          <li> <%= link_to "Listings", listings_path %> </li>
+          <li> <%= link_to "Trips", login_path %> </li>
+          <li> <%= link_to "Messages", signup_path %> </li>
+          <li> <%= link_to "#{current_user.first_name}", dashboard_path %> </li>
+          <li> <%= link_to "About", about_path %> </li>
+          <li> <%= link_to "Logout", logout_path, method: "delete" %> </li>
+        <% elsif current_user %>
+          <li> <%= link_to "Become a Host", userroles_path(become: 'host'), method: "post" %> </li>
+          <li> <%= link_to "Trips", login_path %> </li>
+          <li> <%= link_to "Messages", signup_path %> </li>
+          <li> <%= link_to "#{current_user.first_name}", dashboard_path %> </li>
+          <li> <%= link_to "About", about_path %> </li>
+          <li> <%= link_to "Logout", logout_path, method: "delete" %> </li>
+        <% else %>
+          <li> <%= link_to "Login", login_path %> </li>
+          <li> <%= link_to "Sign Up", signup_path %> </li>
+          <li> <%= link_to "About", about_path %> </li>
+        <% end %>
     </ul>
   </div>
 </div>
