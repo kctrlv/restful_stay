@@ -93,6 +93,8 @@ body {
 }
 
 .about {
+  margin-top:50px;
+  margin-bottom:200px;
   border-style:solid;
   opacity: 0.90;
   border-color: #00a99d;
@@ -130,13 +132,19 @@ body {
   font-size: 20px;
 }
 
-.navbar-default .navbar-nav > li > a:hover{
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
     color: ##b29f67;
 }
 
 .btn-primary, .btn-default {
   background-color: #00a99d;
   border-color: #00a99d;
+}
+
+#login-button {
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .btn-primary:hover, .btn-default:hover {
