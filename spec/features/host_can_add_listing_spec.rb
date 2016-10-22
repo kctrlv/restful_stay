@@ -24,9 +24,9 @@ RSpec.feature "Host creates listing" do
     # When I fill in name with "Turing Basement"_
     fill_in "Name", with: "Turing Basement"
     # When I fill in the Image URL field with a picture of the turing basement
-    fill_in "Image URL", with: ""
+    fill_in "Image url", with: "https://cdn-images-1.medium.com/max/800/1*WSGUx20LcaZWPEj5XVGx9w.jpeg"
     # When I fill in Location with "Denver"
-    select "Denver", from: "cities"
+    select "Denver", from: "listing_city_id"
     # When I fill in Description with "Coding Dungeon"
     fill_in "Description", with: "Coding Dungeon"
     # When I fill in the price per night as $39
