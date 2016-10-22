@@ -2,7 +2,7 @@
   <a href="/" class='navbar-brand'>RESTful_stay</a>
     <div class="container-fluid">
       <ul class="nav navbar-nav navbar-right">
-        <div class="dropdown">
+        <!-- <div class="dropdown">
           <button class="btn btn-default dropdown-toggle" type="button" id="cities" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
             <span class="caret"></span>
@@ -15,7 +15,7 @@
             <li><a href="#">Fort Collins</a></li>
             <li><a href="#">Estes Park</a></li>
           </ul>
-        </div>
+        </div> -->
         <% if current_user && current_user.host? %>
           <li> <%= link_to "Listings", listings_path %> </li>
           <li> <%= link_to "Trips", login_path %> </li>
