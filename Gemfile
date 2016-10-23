@@ -33,6 +33,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec-rails'
   gem 'capybara'
+  gem 'capybara-screenshot'
   gem 'launchy'
   gem 'factory_girl_rails'
   gem 'shoulda-matchers'

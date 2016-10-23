@@ -47,6 +47,9 @@ class PermissionService
       return true if controller == 'sessions' && action.in?(%w(new create destroy))
       return true if controller == 'users' && action.in?(%w(new create show))
       return true if controller == 'confirmation' && action.in?(%w(new create))
+      return true if controller == 'cities' && action.in?(%w(show))
+      return true if controller == 'listings' && action.in?(%w(show))
+
     end
 
 end
