@@ -1,5 +1,6 @@
 class ListingsController < ApplicationController
   def index
+    @listings = current_user.listings
   end
 
   def new
@@ -7,7 +8,6 @@ class ListingsController < ApplicationController
   end
 
   def create
-    # byebug
     @listing = Listing.make(listing_params, current_user.id)
     if @listing.save
       flash[:success] = "Your listing was created"
@@ -21,10 +21,30 @@ class ListingsController < ApplicationController
   def show
     @listing = Listing.find(params[:id])
   end
-
+  
+  def edit
+    @listing = Listing.find(params[:id])
+  end
+  
+  def update
+    @listing = Listing.find(params[:id])
+    @listing = Listing.revise(listing_params, @listing.id)
+    if @listing.update(updated_params)
+      flash[:success] = "Listing Updated Successfully"
+      redirect_to @listing
+    else
+      flash.now[:danger] = "Listing not updated, due to incorrect parameters"
+      render :edit
+    end
+  end
+  
   private
 
   def listing_params
     params.require(:listing).permit(:name, :image_url, :city_id, :description, :price_per_night, :start_date, :end_date)
+  end
+  
+  def updated_params
+    params.require(:listing).permit(:name, :image_url, :city_id, :description, :price_per_night)
   end
 end
