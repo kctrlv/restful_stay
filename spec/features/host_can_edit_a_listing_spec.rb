@@ -57,6 +57,5 @@ RSpec.feature "Host can edit listing" do
     expect(current_path).to eq("/listings/#{listing1.id}")
     # And I expect the listing I edited to now have the name "The Blakement"
     expect(page).to have_content("The Blakement")
-    save_and_open_page
   end
 end
