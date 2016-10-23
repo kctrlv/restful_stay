@@ -16,7 +16,7 @@ class Listing < ApplicationRecord
     listing.days << days
     return listing
   end
-  
+
   def self.revise(params, listing_id)
     listing = Listing.find(listing_id)
     listing.days.clear
