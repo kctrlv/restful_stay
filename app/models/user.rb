@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :user_roles
   has_many :roles, through: :user_roles
   has_many :listings, foreign_key: :host_id
+  has_many :trips, foreign_key: :guest_id
 
   def inactive?
     status == 'inactive'

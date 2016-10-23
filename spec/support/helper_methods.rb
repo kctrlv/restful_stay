@@ -19,3 +19,15 @@ def login_as_admin
   user = User.find_by(first_name: "Admin")
   login(user, 'admin')
 end
+
+def make_listing_for_booking
+  Listing.make({name: "Cool Room",
+                description: "This is a cool place",
+                image_url: Faker::Avatar.image,
+                price_per_night: 65.50,
+                city_id: City.find_by(name: "Denver").id,
+                start_date: Day.all[10].id,
+                end_date: Day.all[20].id },
+                User.find_by(first_name: "denverhost").id).save
+  return Listing.find_by(name: "Cool Room")
+end

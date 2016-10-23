@@ -18,7 +18,14 @@
 <%= @listing.host.description %>
 <%= image_tag @listing.host.picture_url %>
 
-<h3>Dates available: </h3>
-<% @listing.days.future_days.each do |day| %>
-  <p> <%= day.date %> </p>
-<% end %>
+<div class="dates_available">
+  <h3>Dates available: </h3>
+  <% @listing.days.future_days.each do |day| %>
+    <div class="date">
+      <p> <%= day.date %> </p>
+    </div>
+  <% end %>
+</div>
+
+
+<%= link_to "Book this Listing", new_trip_path(listing: @listing) %>
