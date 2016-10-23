@@ -18,9 +18,10 @@ class Listing < ApplicationRecord
   end
   
   def self.revise(params, listing_id)
+    listing = Listing.find(listing_id)
+    listing.days.clear
     date_range = params.delete(:start_date)..params.delete(:end_date)
     days = date_range.to_a.map{ |day_id| Day.find(day_id) }
-    listing = Listing.find(listing_id)
     listing.days << days
     return listing
   end

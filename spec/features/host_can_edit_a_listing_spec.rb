@@ -6,6 +6,10 @@ RSpec.feature "Host can edit listing" do
     login_as_host
     listing1 = create(:listing, host_id: 3)
     listing2 = create(:listing, host_id: 3)
+    day1 = Day.new(date: Date.today)
+    day2 = Day.new(date: Date.tomorrow)
+    listing1.days << day1
+    listing1.days << day2
     # As a Host
     # When I click "Listings"
     click_on "Listings"
@@ -44,12 +48,14 @@ RSpec.feature "Host can edit listing" do
     # I expect to see a form to edit parameters of the listing
     # When I fill in name with "The Blakement"
     fill_in "Name", with: "The Blakement"
+    
+    select "2016-11-10", from: "listing_start_date"
+    select "2016-11-20", from: "listing_end_date"
     # And I click on "Update Listing"
     click_on "Update Listing"
     # I expect my path to be "/listings/:user_id"
     expect(current_path).to eq("/listings/#{listing1.id}")
     # And I expect the listing I edited to now have the name "The Blakement"
     expect(page).to have_content("The Blakement")
-    save_and_open_page  
   end
 end
