@@ -86,11 +86,13 @@ class Seed
     city_hosts = User.all[4..9]
     city_hosts.each_with_index do |city_host, index|
       2.times do
-        city_host.listings.create(name: Faker::Address.street_name,
-                                description: Faker::Lorem.sentence,
-                                image_url: Faker::Avatar.image,
-                                price_per_night: Faker::Number.decimal(2),
-                                city_id: index+1)
+        Listing.make({name: Faker::Address.street_name,
+                      description: Faker::Lorem.sentence,
+                      image_url: Faker::Avatar.image,
+                      price_per_night: Faker::Number.decimal(2),
+                      city_id: index+1,
+                      start_date: Day.all[rand(1..10)].id,
+                      end_date: Day.all[rand(11..20)].id }, city_host.id).save
       end
     end
   end
