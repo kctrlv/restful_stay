@@ -5,7 +5,8 @@ RSpec.feature "Visitor sees Listings" do
     # As a visitor
     # Given that a particular city has listings
     city = City.find_by(name: "Colorado Springs")
-    5.times { create(:listing, city: city) }
+    # 5.times { create(:listing, city: city) }
+    create_list(:listing, 5, city: city)
     # When I visit "/"
     visit('/')
     # I expect to see a list of cities with listings
