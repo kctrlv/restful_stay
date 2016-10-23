@@ -1,1 +1,24 @@
 <h1> <%= @listing.name %> </h1>
+
+<br>
+
+<h3>About this listing: </h3>
+<h4> <%= @listing.description %> </h4>
+
+<br>
+
+<h3>Check out the beautiful listing: </h3>
+<%= image_tag @listing.image_url %>
+
+<br>
+<br>
+
+<h3>About this host: </h3>
+<%= @listing.host.first_name %>
+<%= @listing.host.description %>
+<%= image_tag @listing.host.picture_url %>
+
+<h3>Dates available: </h3>
+<% @listing.days.each do |day| %>
+  <p> <%= day.date %> </p>
+<% end %>

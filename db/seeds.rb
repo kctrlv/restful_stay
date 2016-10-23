@@ -8,10 +8,12 @@ class Seed
     Role.delete_all
     City.delete_all
     Day.delete_all
+    Listing.delete_all
     generate_roles
     generate_users
     generate_cities
     generate_days
+    generate_listings
   end
 
   def self.generate_days
@@ -29,6 +31,16 @@ class Seed
       City.create(name: city)
     end
     puts "Created Cities: #{cities.join(', ')}"
+    assign_thumbnails_to_cities
+  end
+
+  def self.assign_thumbnails_to_cities
+    City.find_by(name: "Colorado Springs").update_attribute(:image_url, 'http://i.imgur.com/tXmWxkR.png')
+    City.find_by(name: "Boulder").update_attribute(:image_url,          'http://i.imgur.com/0XdzpFJ.png')
+    City.find_by(name: "Denver").update_attribute(:image_url,           'http://i.imgur.com/9oz5DKZ.png')
+    City.find_by(name: "Estes Park").update_attribute(:image_url,       'http://i.imgur.com/mWmqdS1.png')
+    City.find_by(name: "Grand Junction").update_attribute(:image_url,   'http://i.imgur.com/vdy9zmE.png')
+    City.find_by(name: "Fort Collins").update_attribute(:image_url,     'http://i.imgur.com/DHopfr6.png')
   end
 
   def self.generate_roles
@@ -53,6 +65,36 @@ class Seed
     end
     puts "Created Users: #{users.join(', ')}"
     assign_roles
+    generate_additional_hosts
+  end
+
+  def self.generate_additional_hosts
+    cities = ['coloradosprings', 'denver', 'boulder', 'grandjunction', 'fortcollins', 'estespark']
+    cities.each do |city|
+      host = User.create(first_name: "#{city}host",
+                  last_name:  "Johnson",
+                  email_address: "#{city}host@restfulstay.com",
+                  phone_number: "+10000000000",
+                  password: "#{city}host",
+                  status: 'active')
+      host.roles << Role.find_by(name: 'traveler')
+      host.roles << Role.find_by(name: 'host')
+    end
+  end
+
+  def self.generate_listings
+    city_hosts = User.all[4..9]
+    city_hosts.each_with_index do |city_host, index|
+      2.times do
+        Listing.make({name: Faker::Address.street_name,
+                      description: Faker::Lorem.sentence,
+                      image_url: Faker::Avatar.image,
+                      price_per_night: Faker::Number.decimal(2),
+                      city_id: index+1,
+                      start_date: Day.all[rand(1..10)].id,
+                      end_date: Day.all[rand(11..20)].id }, city_host.id).save
+      end
+    end
   end
 
   def self.assign_roles

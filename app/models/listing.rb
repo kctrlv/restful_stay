@@ -16,6 +16,14 @@ class Listing < ApplicationRecord
     listing.days << days
     return listing
   end
+  
+  def self.revise(params, listing_id)
+    date_range = params.delete(:start_date)..params.delete(:end_date)
+    days = date_range.to_a.map{ |day_id| Day.find(day_id) }
+    listing = Listing.find(listing_id)
+    listing.days << days
+    return listing
+  end
 
   def start_date
   end

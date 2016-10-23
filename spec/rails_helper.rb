@@ -7,6 +7,8 @@ require 'rspec/rails'
 require 'capybara'
 require 'vcr'
 require 'simplecov'
+require 'capybara/rspec'
+require 'capybara-screenshot/rspec'
 
 SimpleCov.start 'rails' do
     add_filter "/app/channels"
@@ -50,7 +52,7 @@ RSpec.configure do |config|
   config.after(:each) do
     DatabaseCleaner.clean
   end
-  
+
   config.before(:suite) do
     Rails.application.load_seed # loading seeds
   end
