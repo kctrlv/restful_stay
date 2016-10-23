@@ -23,7 +23,7 @@ RSpec.feature "Traveler Can View and Edit Their Profile" do
     expect(page).to have_css("img[src=\"#{user.picture_url}\"]")
     # I expect to see my profile description
     expect(page).to have_content(user.description)
-    # I expect to see a list of my trips 
+    # I expect to see a list of my trips
     expect(page).to have_content("Trips:")
     # I expect to see a button/link to "Edit Profile"
     expect(page).to have_link("Edit Profile")
@@ -33,12 +33,12 @@ RSpec.feature "Traveler Can View and Edit Their Profile" do
     click_link "View Profile"
     # I expect my path to be "/dashboard/:user_id"
     expect(current_path).to eq("/profile/#{user.id}")
-    # I expect to see my profile image 
+    # I expect to see my profile image
     expect(page).to have_css("img[src=\"#{user.picture_url}\"]")
-    # I expect to see my description    
+    # I expect to see my description
     expect(page).to have_content(user.description)
   end
-  
+
   scenario "traveler can edit profile" do
     # As a logged in traveler
     user = create(:user, status: "active", password: 'password')
@@ -57,18 +57,49 @@ RSpec.feature "Traveler Can View and Edit Their Profile" do
     click_on "#{user.first_name}"
     # I expect my path to be "/dashboard"
     expect(current_path).to eq('/dashboard')
-    
+
     # I expect to see a button/link to "Edit Profile"
     expect(page).to have_link("Edit Profile")
     # When I click on "Edit Profile"
     click_link "Edit Profile"
     # I expect my path to be "/dashboard/:user_id"
     expect(current_path).to eq("/dashboard/#{user.id}/edit")
-    
+
     fill_in "First Name", with: "Bob"
     fill_in "Password", with: user.password
     click_on "Update My Profile"
     expect(current_path).to eq("/profile/#{user.id}")
     expect(page).to have_content("Bob")
+  end
+
+  scenario "traveler will have edit page re-rendered when missing params" do
+    # As a logged in traveler
+    user = create(:user, status: "active", password: 'password')
+    trav_role = create(:role, name: "traveler")
+
+    user.roles << trav_role
+    expect(user.traveler?).to eq(true)
+    expect(user.host?).to eq(false)
+
+    visit login_path
+    fill_in "Email", with: user.email_address
+    fill_in "Password", with: user.password
+    click_on "login-button"
+
+    # When I click on "My name"
+    click_on "#{user.first_name}"
+    # I expect my path to be "/dashboard"
+    expect(current_path).to eq('/dashboard')
+
+    # I expect to see a button/link to "Edit Profile"
+    expect(page).to have_link("Edit Profile")
+    # When I click on "Edit Profile"
+    click_link "Edit Profile"
+    # I expect my path to be "/dashboard/:user_id"
+    expect(current_path).to eq("/dashboard/#{user.id}/edit")
+
+    fill_in "First Name", with: "Bob"
+    click_on "Update My Profile"
+    expect(current_path).to eq("/dashboard/#{user.id}/edit")
   end
 end

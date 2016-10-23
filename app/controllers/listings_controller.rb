@@ -8,12 +8,14 @@ class ListingsController < ApplicationController
   end
 
   def create
+    return wrong_dates if listing_params[:start_date] > listing_params[:end_date]
     @listing = Listing.make(listing_params, current_user.id)
     if @listing.save
       flash[:success] = "Your listing was created"
       redirect_to @listing
     else
-      flash_and_rerender(@listing)
+      flash.now[:danger] = "Your listing was not created because of bad parameters"
+      render :new
     end
   end
 
@@ -37,8 +39,14 @@ class ListingsController < ApplicationController
     end
   end
 
-  private
+  def destroy
+    @listing  = Listing.find(params[:id])
+    @listing.destroy
+    flash[:success] = "Listing deleted successfully"
+    redirect_to listings_path
+  end
 
+  private
   def listing_params
     params.require(:listing).permit(:name, :image_url, :city_id, :description, :price_per_night, :start_date, :end_date)
   end
@@ -47,12 +55,7 @@ class ListingsController < ApplicationController
     params.require(:listing).permit(:name, :image_url, :city_id, :description, :price_per_night)
   end
 
-  def flash_and_rerender(listing)
-    if listing[:name] == 'bad_dates'
-      flash.now[:danger] = "Please make sure the end date comes after the start date"
-    else
-      flash.now[:danger] = "Your listing was not created because of bad parameters"
-    end
-    render :new
+  def wrong_dates
+    redirect_to new_listing_path, flash: {warning: "Please make sure the end date comes after the start date"}
   end
 end
