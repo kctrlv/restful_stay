@@ -18,11 +18,12 @@ class Seed
 
   def self.generate_days
     first_day = Date.parse('22-10-2016')
-    days = first_day..first_day.next_year
+    end_date = Date.today.next_year
+    days = first_day..end_date
     days.each do |day|
       Day.create(date: day)
     end
-    puts "Created Days: October 22, 2016 through October 22, 2017"
+    puts "Created Days: #{first_day} through #{end_date}"
   end
 
   def self.generate_cities
