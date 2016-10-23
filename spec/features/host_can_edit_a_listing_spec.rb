@@ -31,14 +31,14 @@ RSpec.feature "Host can edit listing" do
         expect(page).to have_link("Edit Listing")
         expect(page).to have_link("Remove Listing")
       end
-    end  
+    end
     # When I click on "Edit Listing" next to a current listing
     within ".listings" do
       within "li:nth-child(1)" do
         click_link "Edit Listing"
       end
     end
-    
+
     # I expect my path to be "listings/:user_id/:listing_id"
     expect(current_path).to eq("/listings/#{listing1.id}/edit")
     # I expect to see a form to edit parameters of the listing
@@ -50,6 +50,5 @@ RSpec.feature "Host can edit listing" do
     expect(current_path).to eq("/listings/#{listing1.id}")
     # And I expect the listing I edited to now have the name "The Blakement"
     expect(page).to have_content("The Blakement")
-    save_and_open_page  
   end
 end

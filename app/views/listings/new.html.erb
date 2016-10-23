@@ -18,7 +18,7 @@
   <%= f.collection_select :start_date, Day.future_days, :id, :date %>
 
   <%= f.label :end_date %>
-  <%= f.collection_select :end_date, Day.order(:date), :id, :date %>
+  <%= f.collection_select :end_date, Day.future_days, :id, :date %>
 
   <%= f.submit %>
 <% end %>

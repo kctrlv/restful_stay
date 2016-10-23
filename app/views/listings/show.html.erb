@@ -19,6 +19,6 @@
 <%= image_tag @listing.host.picture_url %>
 
 <h3>Dates available: </h3>
-<% @listing.days.each do |day| %>
+<% @listing.days.future_days.each do |day| %>
   <p> <%= day.date %> </p>
 <% end %>

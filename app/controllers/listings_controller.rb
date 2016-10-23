@@ -13,19 +13,18 @@ class ListingsController < ApplicationController
       flash[:success] = "Your listing was created"
       redirect_to @listing
     else
-      flash.now[:danger] = "Your listing was not created because of bad parameters"
-      render :new
+      flash_and_rerender(@listing)
     end
   end
 
   def show
     @listing = Listing.find(params[:id])
   end
-  
+
   def edit
     @listing = Listing.find(params[:id])
   end
-  
+
   def update
     @listing = Listing.find(params[:id])
     @listing = Listing.revise(listing_params, @listing.id)
@@ -37,14 +36,23 @@ class ListingsController < ApplicationController
       render :edit
     end
   end
-  
+
   private
 
   def listing_params
     params.require(:listing).permit(:name, :image_url, :city_id, :description, :price_per_night, :start_date, :end_date)
   end
-  
+
   def updated_params
     params.require(:listing).permit(:name, :image_url, :city_id, :description, :price_per_night)
+  end
+
+  def flash_and_rerender(listing)
+    if listing[:name] == 'bad_dates'
+      flash.now[:danger] = "Please make sure the end date comes after the start date"
+    else
+      flash.now[:danger] = "Your listing was not created because of bad parameters"
+    end
+    render :new
   end
 end
