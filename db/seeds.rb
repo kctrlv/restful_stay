@@ -8,10 +8,12 @@ class Seed
     Role.delete_all
     City.delete_all
     Day.delete_all
+    Listing.delete_all
     generate_roles
     generate_users
     generate_cities
     generate_days
+    generate_listings
   end
 
   def self.generate_days
@@ -63,6 +65,34 @@ class Seed
     end
     puts "Created Users: #{users.join(', ')}"
     assign_roles
+    generate_additional_hosts
+  end
+
+  def self.generate_additional_hosts
+    cities = ['coloradosprings', 'denver', 'boulder', 'grandjunction', 'fortcollins', 'estespark']
+    cities.each do |city|
+      host = User.create(first_name: "#{city}host",
+                  last_name:  "Johnson",
+                  email_address: "#{city}host@restfulstay.com",
+                  phone_number: "+10000000000",
+                  password: "#{city}host",
+                  status: 'active')
+      host.roles << Role.find_by(name: 'traveler')
+      host.roles << Role.find_by(name: 'host')
+    end
+  end
+
+  def self.generate_listings
+    city_hosts = User.all[4..9]
+    city_hosts.each_with_index do |city_host, index|
+      2.times do
+        city_host.listings.create(name: Faker::Address.street_name,
+                                description: Faker::Lorem.sentence,
+                                image_url: Faker::Avatar.image,
+                                price_per_night: Faker::Number.decimal(2),
+                                city_id: index+1)
+      end
+    end
   end
 
   def self.assign_roles

@@ -20,9 +20,9 @@ RSpec.feature "Visitor sees Listings" do
     # I expect to see a list of listings available in this city for the dates selected
     expect(page).to have_content("Listings for Colorado Springs")
     within(".listings") do
-      expect(page).to have_css('.listing', count: 5)
+      expect(page).to have_css('.listing', count: 7)
     end
-    Listing.all.each do |listing|
+    City.find_by(name: "Colorado Springs").listings.all.each do |listing|
       expect(page).to have_content(listing.name)
     end
   end
