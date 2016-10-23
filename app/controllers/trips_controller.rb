@@ -12,9 +12,11 @@ class TripsController < ApplicationController
                      checkout: Day.find(trip_params[:checkout]))
     if @trip.save
       flash[:success] = "Your trip has been booked"
-      # redirect_to trips_path
+      # redirect_to trips_path - CURRENTLY NOT EXISTENT
     else
-
+      ### IF A DAY IN BETWEEN START AND END NOT AVAILABLE
+      ### COMPARE THE ARRAY OF REQUESTED VS THE ARRAY AVAILABLE, CHECK ALL IN A ARE IN B
+      ### CONTINUE TO FLESH OUT THE TEST
 
     end
   end
