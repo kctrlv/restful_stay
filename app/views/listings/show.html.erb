@@ -20,7 +20,7 @@
 
 <div class="dates_available">
   <h3>Dates available: </h3>
-  <% @listing.days.future_days.each do |day| %>
+  <% @listing.available_days.each do |day| %>
     <div class="date">
       <p> <%= day.date %> </p>
     </div>

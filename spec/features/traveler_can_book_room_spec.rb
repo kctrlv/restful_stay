@@ -61,7 +61,7 @@ RSpec.feature "Traveler Books Room" do
         expect(page).to have_content("Checkout: 2016-11-07")
         #  Hosted by: denverhost, with a link to their profile page
         expect(page).to have_content("Hosted by: denverhost")
-        expect(page).to have_link('denverhost', href: profile_show(listing.host))
+        expect(page).to have_link('denverhost', href: profile_show_path(listing.host))
       end
     end
     # And when I go back to the listing of Cool Room

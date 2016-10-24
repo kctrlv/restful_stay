@@ -14,6 +14,8 @@ class TripsController < ApplicationController
                      checkin: Day.find(trip_params[:checkin]).date,
                      checkout: Day.find(trip_params[:checkout]).date)
     if @trip.save
+      update_listing_days
+      # byebug
       flash[:success] = "Your trip has been booked for #{@trip.listing.name}"
       redirect_to trips_path
     else
@@ -35,6 +37,11 @@ class TripsController < ApplicationController
       flash[:danger] = "Please make sure your checkout date comes after the checkin date"
       redirect_to new_trip_path(listing: trip_params[:listing_id])
     end
+  end
+
+  def update_listing_days
+    booked_ids = @trip.dates.map{ |date| Day.find_by(date:date).id }
+    @trip.listing.listing_days.where(day: booked_ids).update_all(status: "booked")
   end
 
 end

@@ -8,6 +8,7 @@ class Listing < ApplicationRecord
 
   has_many :listing_days
   has_many :days, through: :listing_days
+  # scope :available_days, -> { listing_days.where(status: 'available') }
 
   def self.make(params, user_id)
     date_range = params.delete(:start_date)..params.delete(:end_date)
@@ -17,9 +18,19 @@ class Listing < ApplicationRecord
     return listing
   end
 
+  def available_listing_days
+    listing_days.where(status: 'available')
+  end
+
+  def available_days
+    available_listing_days.map do |day|
+      Day.find(day.day_id)
+    end
+  end
+
   def self.revise(params, listing_id)
     listing = Listing.find(listing_id)
-    listing.days.clear
+    listing.available_days.clear
     date_range = params.delete(:start_date)..params.delete(:end_date)
     days = date_range.to_a.map{ |day_id| Day.find(day_id) }
     listing.days << days
