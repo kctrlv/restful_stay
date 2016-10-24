@@ -1,18 +1,21 @@
 class TripsController < ApplicationController
+  def index
+    @trips = current_user.trips
+  end
+
   def new
     @trip = Trip.new(listing: Listing.find(params[:listing]))
   end
 
   def create
     redirect_if_invalid_dates
-    byebug
     @trip = Trip.new(listing: Listing.find(trip_params[:listing_id]),
                      guest: current_user,
-                     checkin: Day.find(trip_params[:checkin]),
-                     checkout: Day.find(trip_params[:checkout]))
+                     checkin: Day.find(trip_params[:checkin]).date,
+                     checkout: Day.find(trip_params[:checkout]).date)
     if @trip.save
-      flash[:success] = "Your trip has been booked"
-      # redirect_to trips_path - CURRENTLY NOT EXISTENT
+      flash[:success] = "Your trip has been booked for #{@trip.listing.name}"
+      redirect_to trips_path
     else
       ### IF A DAY IN BETWEEN START AND END NOT AVAILABLE
       ### COMPARE THE ARRAY OF REQUESTED VS THE ARRAY AVAILABLE, CHECK ALL IN A ARE IN B

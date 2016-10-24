@@ -1,0 +1,18 @@
+<h1>Your Trips: </h1>
+
+<ul class="trips">
+  <% @trips.each do |trip| %>
+    <li class='trip'>
+      <h3> <%= link_to trip.listing.name, trip.listing %> </h3>
+      <h5> Duration: <%= trip.duration %> nights </h5>
+      <!-- expect(page).to have_content("Duration: 2 nights")
+      #  On the dates of 2016-11-05 to 2016-11-07
+      expect(page).to have_content("Checkin: 2016-11-05")
+      expect(page).to have_content("Checkout: 2016-11-07")
+      #  Hosted by: denverhost, with a link to their profile page
+      expect(page).to have_content("Hosted by: denverhost")
+      expect(page).to have_link('denverhost', href: profile_show(listing.host)) -->
+
+    </li>
+  <% end %>
+</ul>
