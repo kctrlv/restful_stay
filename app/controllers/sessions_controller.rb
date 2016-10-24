@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
       if user.inactive?
         redirect_to confirmation_path
       else
-        redirect_to root_path
+        path_based_on_role
       end
     else
       flash.now[:danger] = "Email and/or Password is invalid, please try again."
