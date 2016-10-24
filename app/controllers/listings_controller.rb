@@ -15,7 +15,7 @@ class ListingsController < ApplicationController
       redirect_to @listing
     else
       flash.now[:danger] = "Your listing was not created because of bad parameters"
-      render :new
+      redirect_to new_listing_path
     end
   end
 
