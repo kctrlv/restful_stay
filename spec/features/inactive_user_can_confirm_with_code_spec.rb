@@ -1,7 +1,7 @@
 
 RSpec.feature "Visitor can active account" do
-  VCR.use_cassette("confirmation_code") do
-    scenario "visitor cannot confirm with wrong code" do
+  scenario "visitor cannot confirm with wrong code" do
+    VCR.use_cassette("confirmation_code") do
       # As a vistor
       # When a visit '/signup'
       visit '/signup'
