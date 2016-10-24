@@ -35,7 +35,7 @@ class ListingsController < ApplicationController
       redirect_to @listing
     else
       flash.now[:danger] = "Listing not updated, due to incorrect parameters"
-      render :edit
+      redirect_to edit_listing_path
     end
   end
 
