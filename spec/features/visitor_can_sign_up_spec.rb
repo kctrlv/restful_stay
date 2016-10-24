@@ -33,6 +33,7 @@ RSpec.feature "Visitor Signs Up" do
   end
 
   scenario "visitor cannot signup without all attributes" do
+    VCR.use_cassette("confirmation_code") do
       # As a visitor
       # When I visit '/'
       visit '/'
@@ -58,5 +59,6 @@ RSpec.feature "Visitor Signs Up" do
       # then I should expect to be on '/signup path again'
       #since it will re-render new
       expect(current_path).to eq("/signup")
+    end
   end
 end
