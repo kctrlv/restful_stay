@@ -16,12 +16,7 @@ RSpec.feature "Visitor visits Homepage" do
     # I should see thumbnails with images of the destinations
 
     within (".cities") do
-      expect(page).to have_css("img[src*='colorado_springs']")
-      expect(page).to have_css("img[src*='denver']")
-      expect(page).to have_css("img[src*='boulder']")
-      expect(page).to have_css("img[src*='grand_junction']")
-      expect(page).to have_css("img[src*='fort_collins']")
-      expect(page).to have_css("img[src*='estes_park']")
+      expect(page).to have_css(".city", count: 6)
     end
   end
 end

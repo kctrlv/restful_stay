@@ -1,0 +1,77 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.twilio.com/2010-04-01/Accounts/AC26311c60983b4987bb3181034bb3ba3e/Messages.json
+    body:
+      encoding: UTF-8
+      string: "-----011000010111000001101001\r\nContent-Disposition: form-data; name=\"Body\"\r\n\r\nHello
+        from RESTfulStay, Enter your code 359758 to the confirmation page in our website\r\n-----011000010111000001101001\r\nContent-Disposition:
+        form-data; name=\"To\"\r\n\r\n15049065326\r\n-----011000010111000001101001\r\nContent-Disposition:
+        form-data; name=\"From\"\r\n\r\n19702369729\r\n-----011000010111000001101001--"
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - api.twilio.com
+      Content-Type:
+      - multipart/form-data; boundary=---011000010111000001101001
+      Authorization:
+      - Basic QUMyNjMxMWM2MDk4M2I0OTg3YmIzMTgxMDM0YmIzYmEzZTozNDc5MzEyZTc2ODYyYzA5YzdlMzk1Zjg3MWNkYmY2OA==
+      Cache-Control:
+      - no-cache
+      Postman-Token:
+      - 878c5364-3a2b-5fc1-b864-358dadd620ab
+  response:
+    status:
+      code: 201
+      message: CREATED
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Headers:
+      - Accept, Authorization, Content-Type, If-Match, If-Modified-Since, If-None-Match,
+        If-Unmodified-Since
+      Access-Control-Allow-Methods:
+      - GET, POST, DELETE, OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - ETag
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 20 Oct 2016 21:15:29 GMT
+      Strict-Transport-Security:
+      - max-age=15768000
+      Twilio-Request-Duration:
+      - '0.238'
+      Twilio-Request-Id:
+      - RQc3beb305c1da476f8920da8c23048ef4
+      X-Powered-By:
+      - AT-5000
+      X-Shenanigans:
+      - none
+      Content-Length:
+      - '888'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"sid": "SM8a3a2194bdbc421cbf67246a22d69903", "date_created": "Thu,
+        20 Oct 2016 21:15:29 +0000", "date_updated": "Thu, 20 Oct 2016 21:15:29 +0000",
+        "date_sent": null, "account_sid": "AC26311c60983b4987bb3181034bb3ba3e", "to":
+        "+15049065326", "from": "+19702369729", "messaging_service_sid": null, "body":
+        "Sent from your Twilio trial account - Hello from RESTfulStay, Enter your
+        code 359758 to the confirmation page in our website", "status": "queued",
+        "num_segments": "1", "num_media": "0", "direction": "outbound-api", "api_version":
+        "2010-04-01", "price": null, "price_unit": "USD", "error_code": null, "error_message":
+        null, "uri": "/2010-04-01/Accounts/AC26311c60983b4987bb3181034bb3ba3e/Messages/SM8a3a2194bdbc421cbf67246a22d69903.json",
+        "subresource_uris": {"media": "/2010-04-01/Accounts/AC26311c60983b4987bb3181034bb3ba3e/Messages/SM8a3a2194bdbc421cbf67246a22d69903/Media.json"}}'
+    http_version: 
+  recorded_at: Thu, 20 Oct 2016 21:15:29 GMT
+recorded_with: VCR 3.0.3

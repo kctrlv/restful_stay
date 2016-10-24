@@ -5,7 +5,22 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'spec_helper'
 require 'rspec/rails'
 require 'capybara'
+require 'vcr'
+require 'simplecov'
+require 'capybara/rspec'
 
+SimpleCov.start 'rails' do
+    add_filter "/app/channels"
+    add_filter "/app/jobs"
+    add_filter "/app/mailers"
+    add_filter "/app/helpers"
+end
+
+VCR.configure do |config|
+  config.cassette_library_dir = "spec/fixtures/vcr_cassettes"
+  config.hook_into :webmock
+  config.allow_http_connections_when_no_cassette = true
+end
 
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|
@@ -14,26 +29,39 @@ Shoulda::Matchers.configure do |config|
   end
 end
 
+
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
+
+  config.before(:suite) do
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.strategy = :transaction
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
+
+  config.before(:suite) do
+    Rails.application.load_seed # loading seeds
+  end
+
+
+
+
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
   config.use_transactional_fixtures = true
-
-  # config.before(:suite) do
-  #   DatabaseCleaner.strategy = :transaction
-  #   DatabaseCleaner.clean_with(:truncation)
-  # end
-  #
-  # config.around(:each) do |example|
-  #   DatabaseCleaner.cleaning do
-  #     example.run
-  #   end
-  # end
-
   config.infer_spec_type_from_file_location!
   config.filter_rails_from_backtrace!
 

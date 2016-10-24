@@ -1,58 +1,21 @@
-<div class="dropdown">
-  <button class="btn btn-default dropdown-toggle" type="button" id="cities" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-    Cities
-    <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu cities_list" aria-labelledby="dropdownMenu1">
-    <li><a href="#">Colorado Springs</a></li>
-    <li><a href="#">Denver</a></li>
-    <li><a href="#">Boulder</a></li>
-    <li><a href="#">Grand Junction</a></li>
-    <li><a href="#">Fort Collins</a></li>
-    <li><a href="#">Estes Park</a></li>
-  </ul>
-</div>
-
+  <div class="row text-center welcome">
+    <h2>Welcome to RESTful_stay</h2>
+    <p>
+      Book the trip of your dreams, browse listings in the cities below
+    </p>
+  </div>
 
 <div class="jumbotron cities">
-  <div class="row">
-    <div class="col-sm-4">
-      <div class="thumbnail img-responsive">
-        <p> Colorado Springs </p>
-        <%= image_tag "colorado_springs.jpg" %>
-      </div>
+  <% @cities.order(:name).in_groups_of(3, false).each do |group| %>
+    <div class="row text-center">
+      <% group.each do |city| %>
+        <div class="city col-sm-4">
+          <p> <%= link_to city.name, city_path(city) %> </p>
+          <div class="img-thumbnail center-block">
+            <%= link_to image_tag(city.image_url), city_path(city) %>
+          </div>
+        </div>
+      <% end %>
     </div>
-    <div class="col-sm-4">
-      <div class="thumbnail img-responsive">
-        <p> Denver </p>
-        <%= image_tag "denver.jpg" %>
-      </div>
-    </div>
-    <div class="col-sm-4">
-      <div class="thumbnail img-responsive">
-        <p> Boulder </p>
-        <%= image_tag "boulder.jpg" %>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-4">
-      <div class="thumbnail img-responsive">
-        <p> Grand Junction </p>
-        <%= image_tag "grand_junction.jpg" %>
-      </div>
-    </div>
-    <div class="col-sm-4">
-      <div class="thumbnail img-responsive">
-        <p> Fort Collins </p>
-        <%= image_tag "fort_collins.jpg" %>
-      </div>
-    </div>
-    <div class="col-sm-4">
-      <div class="thumbnail img-responsive">
-        <p> Estes Park </p>
-        <%= image_tag "estes_park.jpg" %>
-      </div>
-    </div>
-  </div>
+  <% end %>
 </div>
