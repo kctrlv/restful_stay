@@ -23,4 +23,8 @@ Rails.application.routes.draw do
   patch 'dashboard/:user_id', to: 'users#update'
   get 'dashboard/:user_id/edit', to: 'dashboard#edit', as: 'dashboard_edit'
   get 'profile/:user_id', to: 'users#show', as: 'profile_show'
+  
+  namespace :admin do
+    get 'dashboard', to: "users#index", as: "dashboard"
+  end
 end
