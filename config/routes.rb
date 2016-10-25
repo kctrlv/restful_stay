@@ -34,5 +34,9 @@ Rails.application.routes.draw do
     get 'dashboard/manage_listings/:listing_id', to: "listings#show", as: "show_listing"
     delete 'dashboard/manage_listings/:listing_id', to: "listings#destroy", as: "listing_delete"
     get 'dashboard/manage_cities', to: "cities#index", as: "manage_cities"
+    get 'dashboard/manage_cities/new', to: "cities#new", as: "new_city"
+    get 'dashboard/manage_cities/:city_id', to: "cities#show", as: "show_city"
+    delete 'dashboard/manage_cities/:city_id', to: "cities#destroy", as: "city_delete"
+    post 'dashboard/manage_cities', to: "cities#create", as: "create_city"
   end
 end
