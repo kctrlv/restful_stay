@@ -6,7 +6,7 @@ class User < ApplicationRecord
   validates :password, length: { in: 4..20 }
   validates :email_address, presence: true #we need to add uniqueness for the email address
   validates_format_of :email_address, :with => /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/
-
+  validates_length_of :api_key, is: 32
   has_many :user_roles
   has_many :roles, through: :user_roles
   has_many :listings, foreign_key: :host_id

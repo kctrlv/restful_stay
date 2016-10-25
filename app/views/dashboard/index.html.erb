@@ -2,6 +2,7 @@
   <div class="row text-center">
     <div class="col-md-6">
       <h3><%= @user.first_name %></h3>
+      <h6>Your API Key: <%= @user.api_key %></h6>
       <div class="img-thumbnail center-block">
         <%= image_tag(@user.picture_url) %>
       </div>

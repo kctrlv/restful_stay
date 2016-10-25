@@ -19,6 +19,9 @@ RSpec.feature "Traveler Can View and Edit Their Profile" do
     click_on "#{user.first_name}"
     # I expect my path to be "/dashboard"
     expect(current_path).to eq('/dashboard')
+    # I expect to see my api key
+    expect(page).to have_content("Your API Key: #{user.api_key}")
+
     # I expect to see my profile picture
     expect(page).to have_css("img[src=\"#{user.picture_url}\"]")
     # I expect to see my profile description
