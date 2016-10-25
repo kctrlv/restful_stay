@@ -32,7 +32,9 @@
         </div>
       </div>
     </div>
-    <div class="row text-center">
-      <h3><%= link_to "Book this Listing", new_trip_path(listing: @listing) %></h3>
-    </div>
+    <% if current_user %>
+      <div class="row text-center">
+        <h3><%= link_to "Book this Listing", new_trip_path(listing: @listing) %></h3>
+      </div>
+    <% end %>
 </div>
