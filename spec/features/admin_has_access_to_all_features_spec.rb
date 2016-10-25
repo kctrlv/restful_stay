@@ -111,16 +111,15 @@ RSpec.feature "Admin can see and manipulate all features of the site" do
     expect(current_path).to eq('/admin/dashboard/manage_listings')
     # I expect page to have content Manage Users
     expect(page).to have_content("Manage Listings")
-    # When I click on the user id I should be redirected to admin user show page
-    click_link "#{user_1.id}"
-    expect(current_path).to eq("/admin/dashboard/manage_users/#{user_1.id}/edit")
-    # And I update user status to suspended
-    select "suspended", from: "user_status"
-    # And I click on "Update User Profile"
-    click_button "Update User Profile"
-    # I expect to be redirected to admin manage user dashboard
-    expect(current_path).to eq('/admin/dashboard/manage_users')
+    # When I click on the listing id I should be redirected to admin listing show page
+    expect(page).to have_content("listing1")
+    click_link "#{listing1.id}"
+    expect(current_path).to eq("/admin/dashboard/manage_listings/#{listing1.id}")
+    # And I click on "Delete Listing"
+    click_link "Delete Listing"
+    # I expect to be redirected to admin manage listing dashboard
+    expect(current_path).to eq('/admin/dashboard/manage_listings')
     # I expect user_1 status to equal suspended
-    expect(user_1.status).to eq('suspended')
+    expect(page).to_not have_content("listing1")
   end
 end
