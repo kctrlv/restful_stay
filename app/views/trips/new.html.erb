@@ -1,0 +1,13 @@
+<h1> Confirm your reservation for <%= @trip.listing.name %> </h1>
+
+<%= form_for @trip do |f| %>
+  <%= f.label "Check In" %>
+  <%= f.collection_select :checkin, @trip.listing.available_days, :id, :date %>
+
+  <%= f.label "Check Out" %>
+  <%= f.collection_select :checkout, @trip.listing.available_days, :id, :date %>
+
+  <%= f.hidden_field :listing_id, value: @trip.listing.id %>
+
+  <%= f.submit "Book Trip" %>
+<% end %>

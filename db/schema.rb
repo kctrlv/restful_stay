@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161023003239) do
+ActiveRecord::Schema.define(version: 20161023184555) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,16 @@ ActiveRecord::Schema.define(version: 20161023003239) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "trips", force: :cascade do |t|
+    t.date     "checkin"
+    t.date     "checkout"
+    t.integer  "listing_id"
+    t.integer  "guest_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["listing_id"], name: "index_trips_on_listing_id", using: :btree
+  end
+
   create_table "user_roles", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "role_id"
@@ -80,6 +90,7 @@ ActiveRecord::Schema.define(version: 20161023003239) do
   add_foreign_key "listing_days", "days"
   add_foreign_key "listing_days", "listings"
   add_foreign_key "listings", "cities"
+  add_foreign_key "trips", "listings"
   add_foreign_key "user_roles", "roles"
   add_foreign_key "user_roles", "users"
 end

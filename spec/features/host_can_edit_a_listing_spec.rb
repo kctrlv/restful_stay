@@ -42,7 +42,6 @@ RSpec.feature "Host can edit listing" do
         click_link "Edit Listing"
       end
     end
-
     # I expect my path to be "listings/:user_id/:listing_id"
     expect(current_path).to eq("/listings/#{listing1.id}/edit")
     # I expect to see a form to edit parameters of the listing
