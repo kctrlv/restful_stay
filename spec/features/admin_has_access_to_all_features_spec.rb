@@ -96,7 +96,7 @@ RSpec.feature "Admin can see and manipulate all features of the site" do
     # expect(page).to have_content('suspended')
   end
 
-  scenario "admin update listing of specific host" do
+  scenario "admin can delete listing of specific host" do
     admin = create(:user, status: "active")
     admin.roles << Role.find(3)
     listing1 = create(:listing, name: "listing1", host_id: 3)
