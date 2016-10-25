@@ -95,11 +95,12 @@ RSpec.feature "Admin can see and manipulate all features of the site" do
     expect(user_1.reload.status).to eq('suspended')
     # expect(page).to have_content('suspended')
   end
-  
-  xscenario "admin update listing of specific host" do
+
+  scenario "admin update listing of specific host" do
     admin = create(:user, status: "active")
     admin.roles << Role.find(3)
-    user_1 = create(:user, first_name: "Raphael", last_name: "Barbo",  status: 'active')
+    listing1 = create(:listing, name: "listing1", host_id: 3)
+    listing2 = create(:listing, name: "listing2", host_id: 3)
     # As an admin, I will log in and expect to be redirected to admin dashboard
     login_user(admin)
     #I expect to be in the 'admin/dashboard'
