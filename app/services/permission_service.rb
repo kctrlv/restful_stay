@@ -26,6 +26,9 @@ class PermissionService
 
     def admin_permissions
       return true if controller == 'admin/dashboard' && action.in?(%w(index))
+      return true if controller == 'admin/users' && action.in?(%w(index))
+      return true if controller == 'admin/listings' && action.in?(%w(index))
+      return true if controller == 'admin/cities' && action.in?(%w(index))
       return host_permissions
     end
 
