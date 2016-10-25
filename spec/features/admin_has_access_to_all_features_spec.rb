@@ -31,5 +31,20 @@ RSpec.feature "Admin can see and manipulate all features of the site" do
   end
   
     xscenario "admin should be able to create a new city" do
+      admin = create(:user, status: "active")
+      admin.roles << Role.find(3)
+      # As an admin, I will log in and expect to be redirected to admin dashboard
+      login_user(admin)
+      #I expect to be in the 'admin/dashboard'
+      expect(current_path).to eq('/admin/dashboard')
+      # When I click Link Manager Users
+      click_link "Manage Users"
+      # I expect to be redirected to '/admin/dashboard/manage_users'
+      expect(current_path).to eq('/admin/dashboard/manage_users')
+      # I expect to see a list of all users and their status
+      expect(page).to have_content("First name")
+      expect(page).to have_content("Last name")
+      expect(page).to have_content("Status")
+      #expect(page).to selector(to manipulate that user)
   end
 end
