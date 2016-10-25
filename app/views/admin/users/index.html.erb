@@ -2,14 +2,14 @@
 
 <table style="width:100%">
   <tr>
-    <th>Edit</th>   
-    <th>First name</th> 
-    <th>Last name</th>   
-    <th>Status</th> 
+    <th>Edit</th>
+    <th>First name</th>
+    <th>Last name</th>
+    <th>Status</th>
   </tr>
   <% @users.each do |user| %>
   <tr>
-    <td><%= link_to user.id, dashboard_edit_path(user) %></td>
+    <td><%= link_to user.id, admin_edit_user_path(user) %></td>
     <td><%= user.first_name %></td>
     <td><%= user.last_name %></td>
     <td><%= user.status %></td>
