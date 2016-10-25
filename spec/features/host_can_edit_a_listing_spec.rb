@@ -42,13 +42,12 @@ RSpec.feature "Host can edit listing" do
         click_link "Edit Listing"
       end
     end
-
     # I expect my path to be "listings/:user_id/:listing_id"
     expect(current_path).to eq("/listings/#{listing1.id}/edit")
     # I expect to see a form to edit parameters of the listing
     # When I fill in name with "The Blakement"
     fill_in "Name", with: "The Blakement"
-    
+
     select "2016-11-10", from: "listing_start_date"
     select "2016-11-20", from: "listing_end_date"
     # And I click on "Update Listing"
@@ -58,4 +57,13 @@ RSpec.feature "Host can edit listing" do
     # And I expect the listing I edited to now have the name "The Blakement"
     expect(page).to have_content("The Blakement")
   end
+
+  # scenario "Host cannot edit a listing that has been booked" do
+  #   login_as_denverhost
+  #   book_trip_for_listing
+  #   visit('/')
+  #
+  #   byebug
+  #
+  # end
 end

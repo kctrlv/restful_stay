@@ -20,6 +20,12 @@ def login_as_admin
   login(user, 'admin')
 end
 
+def login_as_denverhost
+  user = User.find_by(first_name: "denverhost")
+  login(user, 'denverhost')
+end
+
+
 def make_listing_for_booking
   Listing.make({name: "Cool Room",
                 description: "This is a cool place",

@@ -23,14 +23,13 @@ class Listing < ApplicationRecord
   end
 
   def available_days
-    x = available_listing_days.map do |day|
-      Day.find(day.day_id)
-    end.sort.reject{ |day| day.date < Date.today }
+    all_days = available_listing_days.map { |day| Day.find(day.day_id) }
+    all_days.sort.reject{ |day| day.date < Date.today }
   end
 
   def self.revise(params, listing_id)
     listing = Listing.find(listing_id)
-    listing.available_days.clear
+    listing.days.clear
     date_range = params.delete(:start_date)..params.delete(:end_date)
     days = date_range.to_a.map{ |day_id| Day.find(day_id) }
     listing.days << days

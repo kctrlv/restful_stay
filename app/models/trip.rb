@@ -5,6 +5,7 @@ class Trip < ApplicationRecord
   validates_presence_of(:checkout)
 
   belongs_to :listing
+  has_one :host, class_name: "User", through: :listing
   belongs_to :guest, class_name: "User"
 
   def duration
