@@ -30,7 +30,7 @@ RSpec.feature "Admin can see and manipulate all features of the site" do
     expect(page).to have_content("Manage Cities")
   end
   
-    xscenario "admin should be able to create a new city" do
+    scenario "admin should be able to create a new city" do
       admin = create(:user, status: "active")
       admin.roles << Role.find(3)
       # As an admin, I will log in and expect to be redirected to admin dashboard
@@ -41,6 +41,8 @@ RSpec.feature "Admin can see and manipulate all features of the site" do
       click_link "Manage Users"
       # I expect to be redirected to '/admin/dashboard/manage_users'
       expect(current_path).to eq('/admin/dashboard/manage_users')
+      # I expect page to have content Manage Users
+      expect(page).to have_content("Manage Users")
       # I expect to see a list of all users and their status
       expect(page).to have_content("First name")
       expect(page).to have_content("Last name")
