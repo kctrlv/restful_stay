@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature "User logs in and out" do
-  scenario "user can log out" do
+  scenario "user can log in" do
     # As a registered user
     user = create(:user)
     #When I visit the homepage

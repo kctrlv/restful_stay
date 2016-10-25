@@ -5,6 +5,7 @@ class DashboardController < ApplicationController
     if current_user
       @user = current_user
     end
+    @trips = current_user.trips
   end
 
   def edit

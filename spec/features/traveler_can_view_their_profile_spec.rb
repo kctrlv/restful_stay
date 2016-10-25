@@ -65,7 +65,7 @@ RSpec.feature "Traveler Can View and Edit Their Profile" do
     # I expect my path to be "/dashboard/:user_id"
     expect(current_path).to eq("/dashboard/#{user.id}/edit")
 
-    fill_in "First Name", with: "Bob"
+    fill_in "First name", with: "Bob"
     fill_in "Password", with: user.password
     click_on "Update My Profile"
     expect(current_path).to eq("/profile/#{user.id}")
@@ -98,7 +98,7 @@ RSpec.feature "Traveler Can View and Edit Their Profile" do
     # I expect my path to be "/dashboard/:user_id"
     expect(current_path).to eq("/dashboard/#{user.id}/edit")
 
-    fill_in "First Name", with: "Bob"
+    fill_in "First name", with: "Bob"
     click_on "Update My Profile"
     expect(current_path).to eq("/dashboard/#{user.id}/edit")
   end

@@ -1,7 +1,7 @@
 
-RSpec.feature "Visitor can active account" do
-  VCR.use_cassette("confirmation_code") do
-    scenario "visitor cannot confirm with wrong code" do
+RSpec.feature "Visitor can activate account" do
+  scenario "visitor is taken to confirmation path when signing up" do
+    VCR.use_cassette("confirmation_code") do
       # As a vistor
       # When a visit '/signup'
       visit '/signup'
@@ -24,7 +24,7 @@ RSpec.feature "Visitor can active account" do
     end
   end
 
-  scenario "visitor cannot confirm with wrong code" do
+  scenario "inactive user cannot confirm with wrong code" do
     VCR.use_cassette("confirmation_code") do
       # As an inactive user
       user = create(:user, verification_code: 540958)
@@ -49,7 +49,7 @@ RSpec.feature "Visitor can active account" do
     end
   end
 
-  scenario "visitor cannot confirm with wrong code" do
+  scenario "visitor cannot visit confirmation path without logging in" do
     VCR.use_cassette("confirmation_code") do
       # As a visitor
       # when I visit homepage
@@ -59,7 +59,7 @@ RSpec.feature "Visitor can active account" do
     end
   end
 
-  scenario "visitor can confirm with two-factor auth" do
+  scenario "inactive user can confirm with two-factor auth" do
     VCR.use_cassette("confirmation_code") do
       # As an inactive user
       user = create(:user, verification_code: 540958)
