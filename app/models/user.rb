@@ -14,6 +14,10 @@ class User < ApplicationRecord
   def inactive?
     status == 'inactive'
   end
+  
+  def suspended?
+    status == 'suspended'
+  end
 
   def activate
     update_attribute(:status, "active")
