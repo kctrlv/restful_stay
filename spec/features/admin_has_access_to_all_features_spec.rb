@@ -86,8 +86,35 @@ RSpec.feature "Admin can see and manipulate all features of the site" do
     click_link "#{user_1.id}"
     expect(current_path).to eq("/admin/dashboard/manage_users/#{user_1.id}/edit")
     # And I update user status to suspended
+    select "suspended", from: "user[status]"
+    # And I click on "Update User Profile"
+    click_button "Update User Profile"
+    # I expect to be redirected to admin manage user dashboard
+    expect(current_path).to eq('/admin/dashboard/manage_users')
+    # I expect user_1 status to equal suspended
+    expect(user_1.reload.status).to eq('suspended')
+    # expect(page).to have_content('suspended')
+  end
+  
+  xscenario "admin update listing of specific host" do
+    admin = create(:user, status: "active")
+    admin.roles << Role.find(3)
+    user_1 = create(:user, first_name: "Raphael", last_name: "Barbo",  status: 'active')
+    # As an admin, I will log in and expect to be redirected to admin dashboard
+    login_user(admin)
+    #I expect to be in the 'admin/dashboard'
+    expect(current_path).to eq('/admin/dashboard')
+    # When I click Link Manager Users
+    click_link "Manage Listings"
+    # I expect to be redirected to '/admin/dashboard/manage_users'
+    expect(current_path).to eq('/admin/dashboard/manage_listings')
+    # I expect page to have content Manage Users
+    expect(page).to have_content("Manage Listings")
+    # When I click on the user id I should be redirected to admin user show page
+    click_link "#{user_1.id}"
+    expect(current_path).to eq("/admin/dashboard/manage_users/#{user_1.id}/edit")
+    # And I update user status to suspended
     select "suspended", from: "user_status"
-    save_and_open_page
     # And I click on "Update User Profile"
     click_button "Update User Profile"
     # I expect to be redirected to admin manage user dashboard
