@@ -51,4 +51,5 @@ class PermissionService
       return true if controller == 'cities' && action.in?(%w(show))
       return true if controller == 'listings' && action.in?(%w(show))
     end
+  #-private
 end
