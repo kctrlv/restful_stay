@@ -48,8 +48,6 @@ class ApplicationController < ActionController::Base
       session.clear
       flash[:danger] = "Your account is temporarily suspended"
       redirect_to login_path
-    else
-      redirect_to root_path
     end
   end
 end
