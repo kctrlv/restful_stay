@@ -8,21 +8,15 @@ class TripsController < ApplicationController
   end
 
   def create
-    redirect_if_invalid_dates
+    return wrong_dates if trip_params[:checkin] > trip_params[:checkout]
     @trip = Trip.new(listing: Listing.find(trip_params[:listing_id]),
                      guest: current_user,
                      checkin: Day.find(trip_params[:checkin]).date,
                      checkout: Day.find(trip_params[:checkout]).date)
+    return dates_already_booked unless @trip.dates_available_to_book
     if @trip.save
-      update_listing_days
-      # byebug
       flash[:success] = "Your trip has been booked for #{@trip.listing.name}"
       redirect_to trips_path
-    else
-      ### IF A DAY IN BETWEEN START AND END NOT AVAILABLE
-      ### COMPARE THE ARRAY OF REQUESTED VS THE ARRAY AVAILABLE, CHECK ALL IN A ARE IN B
-      ### CONTINUE TO FLESH OUT THE TEST
-
     end
   end
 
@@ -32,16 +26,11 @@ class TripsController < ApplicationController
     params.require(:trip).permit(:checkin, :checkout, :listing_id)
   end
 
-  def redirect_if_invalid_dates
-    if trip_params[:checkin] > trip_params[:checkout]
-      flash[:danger] = "Please make sure your checkout date comes after the checkin date"
-      redirect_to new_trip_path(listing: trip_params[:listing_id])
-    end
+  def wrong_dates
+    redirect_to new_trip_path(listing: trip_params[:listing_id]), flash: {warning: "Please make sure your checkout date comes after the checkin date"}
   end
 
-  def update_listing_days
-    booked_ids = @trip.dates.map{ |date| Day.find_by(date:date).id }
-    @trip.listing.listing_days.where(day: booked_ids).update_all(status: "booked")
+  def dates_already_booked
+    redirect_to new_trip_path(listing: trip_params[:listing_id]), flash: {warning: "Dates within your selection have already been booked"}
   end
-
 end

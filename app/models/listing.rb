@@ -25,7 +25,8 @@ class Listing < ApplicationRecord
   def available_days
     available_listing_days.map do |day|
       Day.find(day.day_id)
-    end
+    end.sort
+    # byebug
   end
 
   def self.revise(params, listing_id)

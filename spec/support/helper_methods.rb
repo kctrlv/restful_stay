@@ -31,3 +31,11 @@ def make_listing_for_booking
                 User.find_by(first_name: "denverhost").id).save
   return Listing.find_by(name: "Cool Room")
 end
+
+def book_trip_for_listing
+  trip = Trip.create(listing: make_listing_for_booking,
+                     guest: User.find_by(first_name: "Traveler"),
+                     checkin: Date.parse("2016-11-05"),
+                     checkout: Date.parse("2016-11-07"))
+  return trip
+end

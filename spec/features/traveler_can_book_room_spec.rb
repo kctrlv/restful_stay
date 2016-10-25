@@ -73,4 +73,36 @@ RSpec.feature "Traveler Books Room" do
       expect(page).to_not have_content("2016-11-06")
     end
   end
+
+  scenario "traveler cannot book listing with start date after the end date" do
+    login_as_traveler
+    make_listing_for_booking
+
+    visit('/')
+    click_link "Denver"
+    click_link "Cool Room"
+    click_link "Book this Listing"
+    select "2016-11-08", from: "trip_checkin"
+    select "2016-11-04", from: "trip_checkout"
+    click_button "Book Trip"
+    expect(current_path).to eq("/trips/new")
+    expect(page).to have_content("Please make sure your checkout date comes after the checkin date")
+  end
+
+
+  scenario "traveler cannot book an already-booked listing" do
+    login_as_traveler
+    trip = book_trip_for_listing
+
+    visit('/')
+    click_link "Denver"
+    click_link "Cool Room"
+    click_link "Book this Listing"
+
+    select "2016-11-04", from: "trip_checkin"
+    select "2016-11-08", from: "trip_checkout"
+    click_button "Book Trip"
+    expect(current_path).to eq("/trips/new")
+    expect(page).to have_content("Dates within your selection have already been booked")
+  end
 end
