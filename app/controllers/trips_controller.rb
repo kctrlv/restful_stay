@@ -8,7 +8,8 @@ class TripsController < ApplicationController
   end
 
   def create
-    return wrong_dates if trip_params[:checkin] > trip_params[:checkout]
+    byebug
+    return wrong_dates if trip_params[:checkin].to_i > trip_params[:checkout].to_i
     @trip = Trip.new(listing: Listing.find(trip_params[:listing_id]),
                      guest: current_user,
                      checkin: Day.find(trip_params[:checkin]).date,

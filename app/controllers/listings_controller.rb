@@ -8,7 +8,7 @@ class ListingsController < ApplicationController
   end
 
   def create
-    return wrong_dates(params) if listing_params[:start_date] > listing_params[:end_date]
+    return wrong_dates(params) if listing_params[:start_date].to_i > listing_params[:end_date].to_i
     @listing = Listing.make(listing_params, current_user.id)
     if @listing.save
       flash[:success] = "Your listing was created"
@@ -29,7 +29,7 @@ class ListingsController < ApplicationController
 
   def update
     @listing = Listing.find(params[:id])
-    return wrong_dates(@listing) if listing_params[:start_date] > listing_params[:end_date]
+    return wrong_dates(@listing) if listing_params[:start_date].to_i > listing_params[:end_date].to_i
     @listing = Listing.revise(listing_params, @listing.id)
     if @listing.update(updated_params)
       flash[:success] = "Listing Updated Successfully"
@@ -42,6 +42,7 @@ class ListingsController < ApplicationController
 
   def destroy
     @listing  = Listing.find(params[:id])
+    @listing.clear_listing_days
     @listing.destroy
     flash[:success] = "Listing deleted successfully"
     redirect_to listings_path

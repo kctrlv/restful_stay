@@ -22,6 +22,10 @@ class Listing < ApplicationRecord
     listing_days.where(status: 'available')
   end
 
+  def clear_listing_days
+    listing_days.clear
+  end
+
   def available_days
     all_days = available_listing_days.map { |day| Day.find(day.day_id) }
     all_days.sort.reject{ |day| day.date < Date.today }
