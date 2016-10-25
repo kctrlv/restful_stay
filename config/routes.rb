@@ -30,6 +30,8 @@ Rails.application.routes.draw do
     get 'dashboard/manage_users/:user_id/edit', to: "users#edit", as: "edit_user"
     patch 'dashboard/manage_users/:user_id', to: "users#update", as: "user_update"
     get 'dashboard/manage_listings', to: "listings#index", as: "manage_listings"
+    get 'dashboard/manage_listings/:listing_id', to: "listings#show", as: "show_listing"
+    delete 'dashboard/manage_listings/:listing_id', to: "listings#destroy", as: "listing_delete"
     get 'dashboard/manage_cities', to: "cities#index", as: "manage_cities"
   end
 end
