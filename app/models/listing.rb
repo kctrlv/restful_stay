@@ -23,10 +23,9 @@ class Listing < ApplicationRecord
   end
 
   def available_days
-    available_listing_days.map do |day|
+    x = available_listing_days.map do |day|
       Day.find(day.day_id)
-    end.sort
-    # byebug
+    end.sort.reject{ |day| day.date < Date.today }
   end
 
   def self.revise(params, listing_id)

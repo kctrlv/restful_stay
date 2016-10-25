@@ -32,6 +32,18 @@ def make_listing_for_booking
   return Listing.find_by(name: "Cool Room")
 end
 
+def make_past_listing
+  Listing.make({name: "Pioneer",
+                description: "I created this on the first day",
+                image_url: Faker::Avatar.image,
+                price_per_night: 100.01,
+                city_id: City.find_by(name: "Fort Collins").id,
+                start_date: Day.first.id,
+                end_date: Day.all[10].id },
+                User.find_by(first_name: "fortcollinshost").id).save
+  return Listing.find_by(name: "Pioneer")
+end
+
 def book_trip_for_listing
   trip = Trip.create(listing: make_listing_for_booking,
                      guest: User.find_by(first_name: "Traveler"),

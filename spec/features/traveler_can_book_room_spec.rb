@@ -105,4 +105,21 @@ RSpec.feature "Traveler Books Room" do
     expect(current_path).to eq("/trips/new")
     expect(page).to have_content("Dates within your selection have already been booked")
   end
+
+  scenario "dates in the past do not show as available for a listing" do
+    login_as_traveler
+    make_past_listing
+    visit('/')
+    click_link "Fort Collins"
+    click_link "Pioneer"
+    within (".dates_available") do
+      expect(page).to_not have_content("2016-10-22")
+      expect(page).to_not have_content("2016-10-23")
+    end
+    click_link "Book this Listing"
+    expect(find_field('trip_checkin')).not_to have_content('2016-10-22')
+    expect(find_field('trip_checkin')).not_to have_content('2016-10-23')
+    expect(find_field('trip_checkout')).not_to have_content('2016-10-22')
+    expect(find_field('trip_checkout')).not_to have_content('2016-10-23')
+  end
 end
