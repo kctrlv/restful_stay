@@ -25,6 +25,9 @@ Rails.application.routes.draw do
   get 'profile/:user_id', to: 'users#show', as: 'profile_show'
   
   namespace :admin do
-    get 'dashboard', to: "users#index", as: "dashboard"
+    get 'dashboard', to: "dashboard#index", as: "dashboard"
+    get 'dashboard/manage_users', to: "users#index", as: "manage_users"
+    get 'dashboard/manage_listings', to: "listings#index", as: "manage_listings"
+    get 'dashboard/manage_cities', to: "cities#index", as: "manage_cities"
   end
 end
