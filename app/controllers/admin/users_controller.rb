@@ -11,9 +11,6 @@ class Admin::UsersController < ApplicationController
     @user = User.find(params[:user_id])
     if status_change_params(@user)
       redirect_to admin_manage_users_path
-    else
-      flash.now[:danger] = "Please make sure you have all the info needed."
-      redirect_to admin_edit_user_path
     end
   end
 
