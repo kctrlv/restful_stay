@@ -34,9 +34,21 @@ class ApplicationController < ActionController::Base
   end
   
   def path_based_on_role
-      if current_user.admin?
-        redirect_to admin_dashboard_path
-      else
+    if current_user.admin?
+      redirect_to admin_dashboard_path
+    else
+      redirect_to root_path
+    end
+  end
+  
+  def path_based_on_status
+    if current_user.inactive?
+      redirect_to confirmation_path
+    elsif current_user.suspended?
+      session.clear
+      flash[:danger] = "Your account is temporarily suspended"
+      redirect_to login_path
+    else
       redirect_to root_path
     end
   end
