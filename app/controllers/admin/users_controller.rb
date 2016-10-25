@@ -18,6 +18,7 @@ class Admin::UsersController < ApplicationController
   end
 
   private
+  
   def status_change_params(user)
     user.update_attribute(:status, params[:user][:status])
   end
