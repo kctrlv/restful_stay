@@ -1,5 +1,10 @@
-<h1><%= @user.first_name %> <%= @user.last_name %>'s Profile<h1>
-
-<%= image_tag(@user.picture_url) %>
-
-<h3>Description: <%= @user.description %></h1>
+<div class="jumbotron dashboard_show">
+  <div class="row text-center">
+    <h1><%= @user.first_name %> <%= @user.last_name %>'s Profile<h1>
+      <div class="img-thumbnail center-block">
+        <%= image_tag(@user.picture_url) %>
+      </div>
+    <h3>Description:</h3>
+    <p><%= @user.description %></p>
+  </div>
+</div>
