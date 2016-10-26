@@ -1,6 +1,6 @@
 <div class="jumbotron dashboard_show">
   <div class="row text-center">
-    <div class="col-md-6">
+    <div class="col-md-4">
       <h3><%= @user.first_name %></h3>
       <div class="img-thumbnail center-block">
         <%= image_tag(@user.picture_url) %>
@@ -10,9 +10,15 @@
         <%= link_to "View Profile", profile_show_path(user_id: current_user.id) %>
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-4">
       <h3>Description:</h3>
       <p> <%= @user.description %></p>
+    </div>
+    <div class="col-md-4">
+      <% if @user.host? %>
+      <h3>Reservations:</h3>
+        <p><%=  link_to "Manage Reservations", reservations_path %></p>
+      <% end %>
     </div>
   </div>
   <div class="row text-center">
@@ -30,8 +36,5 @@
     </div>
     <% end %>
   </ul>
-  <% if @user.host? %>
-    <%=  link_to "Reservations", reservations_path %>
-  <% end %>
   </div>
 </div>
