@@ -1,6 +1,7 @@
 class ReservationsController < ApplicationController
   def index
-    @listings = Listing.where(host_id: current_user)
-
+    @trips = Trip.joins(:host).select{ |t| t.host == current_user }
   end
+
+  
 end
