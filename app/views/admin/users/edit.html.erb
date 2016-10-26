@@ -1,0 +1,10 @@
+<h1>Edit Your Profile</h1>
+
+<%= form_for @user, :url => {controller: :users, action: :update}, method: :patch do |f| %>
+<p>First name: <%= @user.first_name %><br></p>
+<p>Last name: <%= @user.last_name %><br></p>
+<p>Email address: <%= @user.email_address %><br></p>
+<p>Phone number: <%= @user.phone_number %><br></p>
+<%= f.select :status, ['active', 'inactive', 'suspended'] %>
+<%= f.submit "Update User Profile" %>
+<% end %>

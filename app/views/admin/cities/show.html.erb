@@ -1,0 +1,5 @@
+<h1>Edit City</h1>
+
+<p>Name: <%= @city.name %><br></p>
+
+<%= link_to 'Delete City', admin_city_delete_path(@city.id), :confirm => 'Are you sure?', :method => :delete %>
