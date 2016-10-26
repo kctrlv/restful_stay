@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161025212152) do
+ActiveRecord::Schema.define(version: 20161026011855) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,15 @@ ActiveRecord::Schema.define(version: 20161025212152) do
     t.datetime "updated_at",                                                 null: false
     t.integer  "host_id"
     t.index ["city_id"], name: "index_listings_on_city_id", using: :btree
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer  "trip_id"
+    t.string   "subject"
+    t.string   "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["trip_id"], name: "index_reviews_on_trip_id", using: :btree
   end
 
   create_table "roles", force: :cascade do |t|
@@ -85,12 +94,14 @@ ActiveRecord::Schema.define(version: 20161025212152) do
     t.datetime "created_at",                                                                           null: false
     t.datetime "updated_at",                                                                           null: false
     t.string   "verification_code"
-    t.string   "api_key",           default: "771b56a7ab0a5d1e62d98765816fc504"
+    t.string   "api_key"
+    t.index ["api_key"], name: "index_users_on_api_key", unique: true, using: :btree
   end
 
   add_foreign_key "listing_days", "days"
   add_foreign_key "listing_days", "listings"
   add_foreign_key "listings", "cities"
+  add_foreign_key "reviews", "trips"
   add_foreign_key "trips", "listings"
   add_foreign_key "user_roles", "roles"
   add_foreign_key "user_roles", "users"

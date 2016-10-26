@@ -5,8 +5,15 @@ Rails.application.routes.draw do
   resources :listings, only: [:index, :new, :create, :show, :edit, :update, :destroy]
   resources :cities, param: :city_name, only: [:show]
   resources :trips, only: [:index, :new, :create]
-
   resources :userroles, only: [:create]
+
+  namespace :api do
+    namespace :v1 do
+      resources :trips, only: [:index] do
+        resources :reviews, only: [:create]
+      end
+    end
+  end
 
   get 'signup', to: 'users#new'
 

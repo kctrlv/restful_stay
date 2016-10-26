@@ -57,3 +57,28 @@ def book_trip_for_listing
                      checkout: Date.parse("2016-11-07"))
   return trip
 end
+
+def traveler_books_two_trips_with_denverhost
+  traveler = User.find_by(first_name: "Traveler")
+  denverhost = User.find_by(first_name: "denverhost")
+
+  traveler.trips.create(
+    listing: denverhost.listings.last,
+    checkin: Date.parse('2016-10-31'),
+    checkout: Date.parse('2016-11-03'))
+  traveler.trips.create(
+    listing: denverhost.listings.first,
+    checkin: Date.parse('2016-11-03'),
+    checkout: Date.parse('2016-11-05'))
+end
+
+def traveler_leaves_review
+  traveler = User.find_by(first_name: "Traveler")
+  traveler_books_two_trips_with_denverhost
+  parameters = {
+    api_key: traveler.api_key,
+    body: "I had such a good time, denverhost is such a good guy. And his cat was soft.",
+    subject: "This was a great place!"
+   }
+  post "/api/v1/trips/#{traveler.trips.first.id}/reviews", params: parameters
+end

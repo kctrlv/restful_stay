@@ -7,7 +7,7 @@ RSpec.describe User, type: :model do
   end
 
   context 'validations' do
-    it { should validate_length_of(:api_key).is_equal_to(32) }
+    # it { should validate_length_of(:api_key).is_equal_to(32) }
   end
 
   it "is an inactive user by default" do
