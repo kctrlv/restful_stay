@@ -21,6 +21,16 @@ class Trip < ApplicationRecord
     (dates - available_dates).empty?
   end
 
+  def user_name
+    @guess = User.find(guest_id)
+    @guess.first_name + " " + @guess.last_name
+  end
+
+  def listing_name
+    @listing = Listing.find(listing_id)
+    @listing.name
+  end
+
   private
 
   def update_listing_days

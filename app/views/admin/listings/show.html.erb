@@ -1,0 +1,7 @@
+<h1>Edit Listing</h1>
+
+<p>Name: <%= @listing.name %><br></p>
+<p>Description: <%= @listing.description %><br></p>
+<p>Price per night: <%= @listing.price_per_night %><br></p>
+
+<%= link_to 'Delete Listing',admin_listing_delete_path(@listing), :confirm => 'Are you sure?', :method => :delete %>

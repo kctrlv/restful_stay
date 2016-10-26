@@ -1,0 +1,11 @@
+<h1> Admin Dashboard</h1>
+
+<%= image_tag(@admin.picture_url) %>
+
+<br>
+
+<h2>Manager Area  </h2>
+
+<h3> <p><%= link_to "Manage Users", admin_manage_users_path %></p> 
+<p><%= link_to "Manage Listings", admin_manage_listings_path %> </p> 
+ <p><%= link_to "Manage Cities", admin_manage_cities_path %> </p>       </h3>

@@ -1,0 +1,18 @@
+<h1>Manage Listings</h1>
+
+<table style="width:100%">
+  <tr>
+    <th>Display listing</th>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Price per night</th>
+  </tr>
+  <% @listings.each do |listing| %>
+  <tr>
+    <td><%= link_to listing.id, admin_show_listing_path(listing) %></td>
+    <td><%= listing.name %></td>
+    <td><%= listing.description %></td>
+    <td><%= listing.price_per_night %></td>
+  </tr>
+  <% end %>
+</table>

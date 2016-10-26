@@ -1,0 +1,8 @@
+<h1>Add City</h1>
+
+<%= form_for [:admin, @city], url: admin_create_city_path do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.submit "Create City" %>
+<% end %>
