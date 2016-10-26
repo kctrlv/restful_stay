@@ -1,13 +1,17 @@
-<h1>Listings for <%= current_user.first_name %></h1>
+<div class="row text-center">
+  <h1>Listings for <%= current_user.first_name %></h1>
 
-<%= link_to "Create Listing", new_listing_path %>
+  <h3><%= link_to "Create Listing", new_listing_path %></h3><br />
 
-<ul class="listings">
-  <% @listings.each do |listing| %>
-    <li>
-      <%= link_to "#{listing.name}", listing %></br>
-      <%= link_to "Edit Listing", edit_listing_path(listing) %></br>
-      <%= link_to "Remove Listing", listing_path(listing), method: 'delete' %></br></br>
-    </li>
-  <% end %>
-</ul>
+  <div class="listings">
+    <% @listings.each do |listing| %>
+    <div class="listing col-sm-4">
+      <div class="listing_wrapper">
+        <strong><%= link_to "#{listing.name}", listing %></strong></br>
+        <%= link_to "Edit Listing", edit_listing_path(listing) %> |
+        <%= link_to "Remove Listing", listing_path(listing), method: 'delete' %></br></br>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>

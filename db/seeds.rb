@@ -36,12 +36,12 @@ class Seed
   end
 
   def self.assign_thumbnails_to_cities
-    City.find_by(name: "Colorado Springs").update_attribute(:image_url, 'http://i.imgur.com/tXmWxkR.png')
-    City.find_by(name: "Boulder").update_attribute(:image_url,          'http://i.imgur.com/0XdzpFJ.png')
-    City.find_by(name: "Denver").update_attribute(:image_url,           'http://i.imgur.com/9oz5DKZ.png')
-    City.find_by(name: "Estes Park").update_attribute(:image_url,       'http://i.imgur.com/mWmqdS1.png')
-    City.find_by(name: "Grand Junction").update_attribute(:image_url,   'http://i.imgur.com/vdy9zmE.png')
-    City.find_by(name: "Fort Collins").update_attribute(:image_url,     'http://i.imgur.com/DHopfr6.png')
+    City.find_by(name: "Colorado Springs").update_attribute(:image_url, 'http://i.imgur.com/YGkazHV.jpg')
+    City.find_by(name: "Boulder").update_attribute(:image_url,          'http://i.imgur.com/4lGwhAG.jpg')
+    City.find_by(name: "Denver").update_attribute(:image_url,           'http://i.imgur.com/kSbD7es.jpg')
+    City.find_by(name: "Estes Park").update_attribute(:image_url,       'http://i.imgur.com/ctJxTC2.jpg')
+    City.find_by(name: "Grand Junction").update_attribute(:image_url,   'http://i.imgur.com/Z0vsyLR.jpg')
+    City.find_by(name: "Fort Collins").update_attribute(:image_url,     'http://i.imgur.com/qTDIZdD.jpg')
   end
 
   def self.generate_roles
@@ -89,7 +89,7 @@ class Seed
       2.times do
         Listing.make({name: Faker::Address.street_name,
                       description: Faker::Lorem.sentence,
-                      image_url: Faker::Avatar.image,
+                      image_url: "http://i.imgur.com/00aovFw.jpg",
                       price_per_night: Faker::Number.decimal(2),
                       city_id: index+1,
                       start_date: Day.all[rand(1..10)].id,

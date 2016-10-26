@@ -1,12 +1,16 @@
-<h1>Booked Reservations</h1>
-
-<table style="width:100%">
+<div class="row text-center">
+  <h1>Booked Reservations</h1><br />
+</div>
+<table class="table" style="width:100%">
+  <thead class="thead-default">
   <tr>
     <th>Guest Name</th>
     <th>Trip Start Date</th>
     <th>Trip End Date</th>
     <th>Listing Details</th>
   </tr>
+</thead>
+<tbody>
   <% @trips.each do |trip| %>
   <tr>
     <td><%= link_to "#{trip.user_name}", profile_show_path(trip.guest_id) %></td>
@@ -15,4 +19,5 @@
     <td><%= link_to "#{trip.listing_name}", listing_path(trip.listing_id) %></td>
   </tr>
   <% end %>
+</tbody>
 </table>
