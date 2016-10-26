@@ -3,7 +3,7 @@
 
   <h3><%= link_to "Create Listing", new_listing_path %></h3><br />
 
-
+  <div class="listings">
     <% @listings.each do |listing| %>
     <div class="listing col-sm-4">
       <div class="listing_wrapper">
@@ -13,5 +13,5 @@
       </div>
     </div>
     <% end %>
-  </ul>
+  </div>
 </div>
