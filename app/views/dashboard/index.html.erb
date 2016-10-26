@@ -28,5 +28,8 @@
       </li>
     <% end %>
   </ul>
+  <% if @user.host? %>
+    <%=  link_to "Reservations", reservations_path %>
+  <% end %>
   </div>
 </div>
