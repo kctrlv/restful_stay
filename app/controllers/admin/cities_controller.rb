@@ -23,7 +23,7 @@ class Admin::CitiesController < ApplicationController
     if @city.save
       redirect_to admin_manage_cities_path
     else
-      render :new
+      redirect_to admin_new_city_path
     end
   end
 
