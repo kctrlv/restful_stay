@@ -19,13 +19,15 @@
     <h2>Trips: </h2>
     <ul class="trips">
     <% @trips.each do |trip| %>
-      <li class='trip'>
+    <div class="listing col-sm-4">
+      <div class="trip_wrapper">
         <h3> <%= link_to trip.listing.name, trip.listing %> </h3>
         <h5> Duration: <%= trip.duration %> nights </h5>
         <h5> Checkin: <%= trip.checkin %></h5>
         <h5> Checkout: <%= trip.checkout %></h5>
         <h5> Hosted by: <%= link_to trip.listing.host.first_name, profile_show_path(trip.listing.host) %></h5>
-      </li>
+      </div>
+    </div>
     <% end %>
   </ul>
   </div>

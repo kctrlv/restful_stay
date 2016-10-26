@@ -7,11 +7,11 @@
 
 <div class="jumbotron cities">
   <% @cities.order(:name).in_groups_of(3, false).each do |group| %>
-    <div class="row text-center">
+    <div class="text-center thumbnails row">
       <% group.each do |city| %>
-        <div class="city col-sm-4">
+        <div class="city col-md-4">
           <p> <%= link_to city.name, city_path(city) %> </p>
-          <div class="img-thumbnail center-block">
+          <div class="img-rounded center-block city_image">
             <%= link_to image_tag(city.image_url), city_path(city) %>
           </div>
         </div>
