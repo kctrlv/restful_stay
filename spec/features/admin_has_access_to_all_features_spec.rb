@@ -122,4 +122,58 @@ RSpec.feature "Admin can see and manipulate all features of the site" do
     # I expect user_1 status to equal suspended
     expect(page).to_not have_content("listing1")
   end
+
+  scenario "admin can delete city" do
+    admin = create(:user, status: "active")
+    admin.roles << Role.find(3)
+    city1 = create(:city, name: "city1")
+    city2 = create(:city, name: "city2")
+    # As an admin, I will log in and expect to be redirected to admin dashboard
+    login_user(admin)
+    #I expect to be in the 'admin/dashboard'
+    expect(current_path).to eq('/admin/dashboard')
+    # When I click Link Manager Cities
+    click_link "Manage Cities"
+    # I expect to be redirected to '/admin/dashboard/manage_cities'
+    expect(current_path).to eq('/admin/dashboard/manage_cities')
+    # I expect page to have content Manage Cities
+    expect(page).to have_content("Manage Cities")
+    # When I click on the city id I should be redirected to admin city show page
+    expect(page).to have_content("city1")
+    click_link "#{city1.id}"
+    expect(current_path).to eq("/admin/dashboard/manage_cities/#{city1.id}")
+    # And I click on "Delete City"
+    click_link "Delete City"
+    # I expect to be redirected to admin manage city dashboard
+    expect(current_path).to eq('/admin/dashboard/manage_cities')
+    # I expect the page to no longer have this city name
+    expect(page).to_not have_content("city1")
+  end
+
+  scenario "admin can add city" do
+    admin = create(:user, status: "active")
+    admin.roles << Role.find(3)
+    # As an admin, I will log in and expect to be redirected to admin dashboard
+    login_user(admin)
+    #I expect to be in the 'admin/dashboard'
+    expect(current_path).to eq('/admin/dashboard')
+    # When I click Link Manager Cities
+    click_link "Manage Cities"
+    # I expect to be redirected to '/admin/dashboard/manage_cities'
+    expect(current_path).to eq('/admin/dashboard/manage_cities')
+    # I expect page to have content Manage Cities
+    expect(page).to have_content("Manage Cities")
+    expect(page).not_to have_content("New City")
+    # And I click on "Add City"
+    click_link "Add City"
+    # I expect to be redirected to admin manage new city dashboard
+    expect(current_path).to eq('/admin/dashboard/manage_cities/new')
+    # Fill in contents for new city
+    fill_in "Name", with: "New City"
+    click_on "Create City"
+
+    expect(current_path).to eq('/admin/dashboard/manage_cities')
+
+    expect(page).to have_content("New City")
+  end
 end
