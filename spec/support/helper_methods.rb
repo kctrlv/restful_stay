@@ -80,5 +80,5 @@ def traveler_leaves_review
     body: "I had such a good time, denverhost is such a good guy. And his cat was soft.",
     subject: "This was a great place!"
    }
-  post "/api/v1/trips/#{traveler.trips.first.id}/reviews", params: parameters
+  post "/api/v1/trips/#{traveler.trips.first.id}/review", params: parameters
 end

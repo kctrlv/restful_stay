@@ -48,7 +48,7 @@ describe 'Traveler API' do
       subject: "This was a great place!",
       body: "I had such a good time, denverhost is such a good guy. And his cat was soft."
      }
-    post "/api/v1/trips/100/reviews", params: parameters
+    post "/api/v1/trips/100/review", params: parameters
     expect(response.status).to eq(404)
     res = JSON.parse(response.body, symbolize_names: true)
     expect(res[:error]).to eq("Unauthorized: You cannot review a trip that you have not booked")
@@ -65,7 +65,7 @@ describe 'Traveler API' do
       body: "I had such a good time, denverhost is such a good guy. And his cat was soft."
      }
 
-    post "/api/v1/trips/#{traveler.trips.first.id}/reviews", params: parameters
+    post "/api/v1/trips/#{traveler.trips.first.id}/review", params: parameters
     expect(response).to be_success
     res = JSON.parse(response.body, symbolize_names: true)
     expect(res[:body]).to eq("Your review has been posted")
@@ -80,7 +80,7 @@ describe 'Traveler API' do
       body: "I had such a good time, denverhost is such a good guy. And his cat was soft."
      }
 
-    post "/api/v1/trips/#{traveler.trips.first.id}/reviews", params: parameters
+    post "/api/v1/trips/#{traveler.trips.first.id}/review", params: parameters
     expect(response.status).to eq(404)
     res = JSON.parse(response.body, symbolize_names: true)
     expect(res[:error]).to eq("Missing parameters")
@@ -95,7 +95,7 @@ describe 'Traveler API' do
       subject: "This was a great place!"
      }
 
-    post "/api/v1/trips/#{traveler.trips.first.id}/reviews", params: parameters
+    post "/api/v1/trips/#{traveler.trips.first.id}/review", params: parameters
     expect(response.status).to eq(404)
     res = JSON.parse(response.body, symbolize_names: true)
     expect(res[:error]).to eq("Missing parameters")
@@ -105,7 +105,7 @@ describe 'Traveler API' do
     traveler = User.find_by(first_name: "Traveler")
     traveler_leaves_review
     parameters = { api_key: traveler.api_key }
-    get "/api/v1/trips/#{traveler.trips.first.id}/reviews", params: parameters
+    get "/api/v1/trips/#{traveler.trips.first.id}/review", params: parameters
     expect(response).to be_success
     res = JSON.parse(response.body, symbolize_names: true)
     expect(res[:body]).to eq("I had such a good time, denverhost is such a good guy. And his cat was soft.")
@@ -116,10 +116,61 @@ describe 'Traveler API' do
     traveler = User.find_by(first_name: "Traveler")
     traveler_leaves_review
     parameters = { api_key: traveler.api_key }
-    get "/api/v1/trips/#{traveler.trips.last.id}/reviews", params: parameters
+    get "/api/v1/trips/#{traveler.trips.last.id}/review", params: parameters
+
     expect(response.status).to eq(404)
     res = JSON.parse(response.body, symbolize_names: true)
+
     expect(res[:error]).to eq("No Review for this Trip")
+  end
+
+  it 'can destroy their reviews' do
+    traveler = User.find_by(first_name: "Traveler")
+    traveler_leaves_review
+
+    parameters = { api_key: traveler.api_key }
+
+    delete "/api/v1/trips/#{traveler.trips.first.id}/review", params: parameters
+    expect(response).to be_success
+    res = JSON.parse(response.body, symbolize_names: true)
+    expect(res[:body]).to eq("Your review has been removed")
+  end
+
+  it 'returns an error message when trying to destroy a nonexistent review' do
+    traveler = User.find_by(first_name: "Traveler")
+    traveler_leaves_review
+
+    parameters = { api_key: traveler.api_key }
+
+    delete "/api/v1/trips/#{traveler.trips.last.id}/review", params: parameters
+    expect(response.status).to eq(404)
+    res = JSON.parse(response.body, symbolize_names: true)
+
+    expect(res[:error]).to eq("No Review for this Trip")
+  end
+
+  it 'can update their reviews' do
+    traveler = User.find_by(first_name: "Traveler")
+    traveler_leaves_review
+
+    parameters = {
+      api_key: traveler.api_key,
+      subject: "I'm blind!",
+      body: "I changed my mind! His cat scratched my eye in my sleep."
+     }
+
+    put "/api/v1/trips/#{traveler.trips.first.id}/review", params: parameters
+    expect(response).to be_success
+    res = JSON.parse(response.body, symbolize_names: true)
+    expect(res[:body]).to eq("Your review has been updated")
+
+    parameters = { api_key: traveler.api_key }
+    get "/api/v1/trips/#{traveler.trips.first.id}/review", params: parameters
+
+    expect(response).to be_success
+    res = JSON.parse(response.body, symbolize_names: true)
+    expect(res[:body]).to eq("I changed my mind! His cat scratched my eye in my sleep.")
+    expect(res[:subject]).to eq("I'm blind!")
   end
 
 
