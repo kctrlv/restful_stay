@@ -1,6 +1,6 @@
 <div class="jumbotron dashboard_show">
   <div class="row text-center">
-    <div class="col-md-6">
+    <div class="col-md-4">
       <h3><%= @user.first_name %></h3>
       <h6>Your API Key: <%= @user.api_key %></h6>
       <div class="img-thumbnail center-block">
@@ -11,22 +11,30 @@
         <%= link_to "View Profile", profile_show_path(user_id: current_user.id) %>
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-4">
       <h3>Description:</h3>
       <p> <%= @user.description %></p>
+    </div>
+    <div class="col-md-4">
+      <% if @user.host? %>
+      <h3>Reservations:</h3>
+        <p><%=  link_to "Manage Reservations", reservations_path %></p>
+      <% end %>
     </div>
   </div>
   <div class="row text-center">
     <h2>Trips: </h2>
     <ul class="trips">
     <% @trips.each do |trip| %>
-      <li class='trip'>
+    <div class="listing col-sm-4">
+      <div class="trip_wrapper">
         <h3> <%= link_to trip.listing.name, trip.listing %> </h3>
         <h5> Duration: <%= trip.duration %> nights </h5>
         <h5> Checkin: <%= trip.checkin %></h5>
         <h5> Checkout: <%= trip.checkout %></h5>
         <h5> Hosted by: <%= link_to trip.listing.host.first_name, profile_show_path(trip.listing.host) %></h5>
-      </li>
+      </div>
+    </div>
     <% end %>
   </ul>
   </div>

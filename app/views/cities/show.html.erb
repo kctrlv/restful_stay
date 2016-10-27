@@ -1,20 +1,21 @@
+<div class="row text-center">  
 <h1> Listings for <%= @city.name %> </h1>
-
-<div class="listings">
-  <% @city.listings.order(:price_per_night).in_groups_of(3, false).each do |group| %>
-    <div class="row text-center">
-      <% group.each do |listing| %>
-        <div class="listing col-sm-4">
-          <div class="img-thumbnail center-block">
-            <%= link_to image_tag(listing.image_url), listing %>
+  <div class="listings">
+    <% @city.listings.order(:price_per_night).in_groups_of(3, false).each do |group| %>
+      <div class="row text-center">
+        <% group.each do |listing| %>
+          <div class="listing col-sm-4">
+            <div class="img-thumbnail center-block">
+              <%= link_to image_tag(listing.image_url), listing %>
+            </div>
+            <p> <%= link_to listing.name, listing_path(listing) %> </p>
+            <p> <%= number_to_currency(listing.price_per_night) %> per night </p>
+            <p>
+              Hosted by: <%= link_to listing.host.first_name, profile_show_path(listing.host.id) %>
+            </p>
           </div>
-          <p> <%= link_to listing.name, listing_path(listing) %> </p>
-          <p> <%= number_to_currency(listing.price_per_night) %> per night </p>
-          <p>
-            Hosted by: <%= link_to listing.host.first_name, profile_show_path(listing.host.id) %>
-          </p>
-        </div>
-      <% end %>
-    </div>
-  <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 </div>

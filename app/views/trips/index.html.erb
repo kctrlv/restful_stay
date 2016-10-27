@@ -1,20 +1,23 @@
-<h1>Your Trips: </h1>
-
-<ul class="trips">
-  <% @trips.each do |trip| %>
-    <li class='trip'>
-      <h3> <%= link_to trip.listing.name, trip.listing %> </h3>
-      <h5> Duration: <%= trip.duration %> nights </h5>
-      <h5> Checkin: <%= trip.checkin %></h5>
-      <h5> Checkout: <%= trip.checkout %></h5>
-      <h5> Hosted by: <%= link_to trip.listing.host.first_name, profile_show_path(trip.listing.host) %></h5>
-      <% if trip.review.nil? %>
-        <h6> <%= link_to "Leave Review", new_trip_review_path(trip) %> </h6>
-      <% else %>
-        <h6> <%= link_to "Show Review", api_v1_trip_review_path(trip, api_key: trip.guest.api_key, utf8: true) %> </h6>
-        <h6> <%= link_to "Edit Review", edit_trip_review_path(trip) %> </h6>
-        <h6> <%= link_to "Delete Review", api_v1_trip_review_path(trip, api_key: trip.guest.api_key, utf8: true), method: :delete %> </h6>
-      <% end %>
-    </li>
-  <% end %>
-</ul>
+<div class="row text-center">
+  <h1>Your Trips: </h1>
+  <ul class="trips">
+    <% @trips.each do |trip| %>
+      <div class='trip col-sm-4'>
+        <div class="trip_wrapper">
+          <h3> <%= link_to trip.listing.name, trip.listing %> </h3>
+          <h5> Duration: <%= trip.duration %> nights </h5>
+          <h5> Checkin: <%= trip.checkin %></h5>
+          <h5> Checkout: <%= trip.checkout %></h5>
+          <h5> Hosted by: <%= link_to trip.listing.host.first_name, profile_show_path(trip.listing.host) %></h5>
+        </div>
+          <% if trip.review.nil? %>
+            <h6> <%= link_to "Leave Review", new_trip_review_path(trip) %> </h6>
+          <% else %>
+            <h6> <%= link_to "Show Review", api_v1_trip_review_path(trip, api_key: trip.guest.api_key, utf8: true) %> </h6>
+            <h6> <%= link_to "Edit Review", edit_trip_review_path(trip) %> </h6>
+            <h6> <%= link_to "Delete Review", api_v1_trip_review_path(trip, api_key: trip.guest.api_key, utf8: true), method: :delete %> </h6>
+          <% end %>
+      </div>
+    <% end %>
+  </ul>
+</div>
