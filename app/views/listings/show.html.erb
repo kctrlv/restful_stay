@@ -34,9 +34,11 @@
       </div>
       <% @listing.trips.each do |trip| %>
         <div class="row text-center">
-          <h3> <%= trip.review.subject %> </h2>
-          <h4> <%= trip.review.body %> </h3>
-          <h6> <%= trip.guest.first_name %> checked in on <%= trip.checkin %> and checked out on <%= trip.checkout %> </h6>
+          <% if trip.review %>
+            <h3> <%= trip.review.subject %> </h2>
+            <h4> <%= trip.review.body %> </h3>
+            <h6> <%= trip.guest.first_name %> checked in on <%= trip.checkin %> and checked out on <%= trip.checkout %> </h6>
+          <% end %>
         </div>
       <% end %>
     </div>
