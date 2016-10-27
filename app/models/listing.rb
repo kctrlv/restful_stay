@@ -8,14 +8,13 @@ class Listing < ApplicationRecord
 
   has_many :listing_days
   has_many :days, through: :listing_days
-  # scope :available_days, -> { listing_days.where(status: 'available') }
 
   def self.make(params, user_id)
     date_range = params.delete(:start_date)..params.delete(:end_date)
-    days = date_range.to_a.map{ |day_id| Day.find(day_id) }
+    days = date_range.to_a.map { |day_id| Day.find(day_id) }
     listing = Listing.new(params.merge(host_id: user_id))
     listing.days << days
-    return listing
+    listing
   end
 
   def available_listing_days
@@ -28,16 +27,16 @@ class Listing < ApplicationRecord
 
   def available_days
     all_days = available_listing_days.map { |day| Day.find(day.day_id) }
-    all_days.sort.reject{ |day| day.date < Date.today }
+    all_days.sort.reject { |day| day.date < Date.today }
   end
 
   def self.revise(params, listing_id)
     listing = Listing.find(listing_id)
     listing.days.clear
     date_range = params.delete(:start_date)..params.delete(:end_date)
-    days = date_range.to_a.map{ |day_id| Day.find(day_id) }
+    days = date_range.to_a.map { |day_id| Day.find(day_id) }
     listing.days << days
-    return listing
+    listing
   end
 
   def start_date

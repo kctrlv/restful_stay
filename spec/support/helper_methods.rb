@@ -25,7 +25,6 @@ def login_as_denverhost
   login(user, 'denverhost')
 end
 
-
 def make_listing_for_booking
   Listing.make({name: "Cool Room",
                 description: "This is a cool place",
@@ -51,11 +50,11 @@ def make_past_listing
 end
 
 def book_trip_for_listing
-  trip = Trip.create(listing: make_listing_for_booking,
-                     guest: User.find_by(first_name: "Traveler"),
-                     checkin: Date.parse("2016-11-05"),
-                     checkout: Date.parse("2016-11-07"))
-  return trip
+  Trip.create(listing: make_listing_for_booking,
+              guest: User.find_by(first_name: "Traveler"),
+              checkin: Date.parse("2016-11-05"),
+              checkout: Date.parse("2016-11-07")
+  )
 end
 
 def traveler_books_two_trips_with_denverhost
@@ -65,11 +64,13 @@ def traveler_books_two_trips_with_denverhost
   traveler.trips.create(
     listing: denverhost.listings.last,
     checkin: Date.parse('2016-10-31'),
-    checkout: Date.parse('2016-11-03'))
+    checkout: Date.parse('2016-11-03')
+  )
   traveler.trips.create(
     listing: denverhost.listings.first,
     checkin: Date.parse('2016-11-03'),
-    checkout: Date.parse('2016-11-05'))
+    checkout: Date.parse('2016-11-05')
+  )
 end
 
 def traveler_leaves_review
@@ -79,7 +80,7 @@ def traveler_leaves_review
     api_key: traveler.api_key,
     body: "I had such a good time, denverhost is such a good guy. And his cat was soft.",
     subject: "This was a great place!"
-   }
+  }
   post "/api/v1/trips/#{traveler.trips.first.id}/review", params: parameters
 end
 

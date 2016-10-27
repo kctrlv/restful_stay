@@ -26,7 +26,7 @@ class Trip < ApplicationRecord
   private
 
   def update_listing_days
-    booked_ids = self.dates.map{ |date| Day.find_by(date:date).id }
-    self.listing.listing_days.where(day: booked_ids).update_all(status: "booked")
+    booked_ids = dates.map { |date| Day.find_by(date: date).id }
+    listing.listing_days.where(day: booked_ids).update_all(status: "booked")
   end
 end

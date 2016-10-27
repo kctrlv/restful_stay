@@ -2,14 +2,13 @@ require 'net/http'
 require 'uri'
 
 class TwilioService
-
   def self.code_generator
-      connection
-      @code
+    connection
+    @code
   end
 
   def self.generate
-    @code = rand(100000...999999).to_s
+    @code = rand(100_000...999_999).to_s
   end
 
   def self.connection

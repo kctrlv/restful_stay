@@ -3,7 +3,7 @@ class City < ApplicationRecord
   has_many :listings
 
   def slug
-    name.downcase.gsub(" ", "-")
+    name.downcase.tr(" ", "-")
   end
 
   def to_param
