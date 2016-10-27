@@ -23,11 +23,7 @@ RSpec.feature "Traveler Books Room" do
     # I expect my path to be "/listings:id"
     expect(current_path).to eq("/listings/#{listing.id}")
     # I expect to see a list of available dates, with dates available on 11/05-06
-    within (".dates_available") do
-      expect(page).to have_css('.date', count: 11)
-      expect(page).to have_content("2016-11-05")
-      expect(page).to have_content("2016-11-06")
-    end
+    expect(listing.available_days.count).to eq(11)
     # And I click the link to book the listing
     click_link "Book this Listing"
     # I expect my path to be "/trips/new"
@@ -67,11 +63,7 @@ RSpec.feature "Traveler Books Room" do
     # And when I go back to the listing of Cool Room
     click_link "Cool Room"
     # I expect to not see 11-05 and 11-06 on the available dates
-    within (".dates_available") do
-      expect(page).to have_css('.date', count: 9)
-      expect(page).to_not have_content("2016-11-05")
-      expect(page).to_not have_content("2016-11-06")
-    end
+    expect(listing.available_days.count).to eq(9)
   end
 
   scenario "traveler cannot book listing with start date after the end date" do
@@ -92,7 +84,7 @@ RSpec.feature "Traveler Books Room" do
 
   scenario "traveler cannot book an already-booked listing" do
     login_as_traveler
-    trip = book_trip_for_listing
+    book_trip_for_listing
 
     visit('/')
     click_link "Denver"
