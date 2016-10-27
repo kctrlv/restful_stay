@@ -12,7 +12,7 @@ RSpec.feature "Traveler Leaves Reviews" do
         click_link "Leave Review"
       end
     end
-    trip = Trip.find_by(checkin: "2016-10-31")
+    trip = User.find_by(first_name: "Traveler").trips.first
     expect(current_path).to eq("/trips/#{trip.id}/review/new")
     fill_in "Subject", with: "This place was good."
     fill_in "Body", with: "I really enjoyed staying here, highly recommend."
@@ -79,7 +79,7 @@ RSpec.feature "Traveler Leaves Reviews" do
         click_link "Edit Review"
       end
     end
-    trip = Trip.find_by(checkin: "2016-10-31")
+    trip = User.find_by(first_name: "Traveler").trips.first
     expect(current_path).to eq("/trips/#{trip.id}/review/edit")
     fill_in "Subject", with: "This place was really good."
     fill_in "Body", with: "I am a cat."
