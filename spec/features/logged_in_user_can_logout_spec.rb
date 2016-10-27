@@ -21,7 +21,6 @@ RSpec.feature "User logs in and out" do
     within(".navbar") do
       expect(page).to have_content("#{user.first_name}")
       expect(page).to have_content("Trips")
-      expect(page).to have_content("Messages")
       expect(page).to have_content("Logout")
     end
   end
