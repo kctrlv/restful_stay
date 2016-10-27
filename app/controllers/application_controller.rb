@@ -40,7 +40,7 @@ class ApplicationController < ActionController::Base
       redirect_to root_path
     end
   end
-  
+
   def path_based_on_status
     if current_user.inactive?
       redirect_to confirmation_path
