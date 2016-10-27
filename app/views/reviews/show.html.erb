@@ -1,0 +1,11 @@
+<div class="row text-center">
+  <h1> Review for <%= @review.trip.listing.name %> </h1>
+
+  <h2> Reviewed by: <%= @review.trip.guest.first_name %> </h2>
+
+  <h3> <%= @review.subject %> </h2>
+  <h4> <%= @review.body %> </h3>
+
+  <h6> <%= @review.trip.guest.first_name %> checked in on <%= @review.trip.checkin %> and checked out on <%= @review.trip.checkout %> </h6>
+  <h6> Hosted by: <%= @review.trip.host.first_name %> </h6>
+</div>

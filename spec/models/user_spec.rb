@@ -6,6 +6,10 @@ RSpec.describe User, type: :model do
     it { should have_many(:roles) }
   end
 
+  context 'validations' do
+    # it { should validate_length_of(:api_key).is_equal_to(32) }
+  end
+
   it "is an inactive user by default" do
     user = create(:user)
     expect(user.status).to eq('inactive')

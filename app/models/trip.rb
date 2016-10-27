@@ -8,6 +8,8 @@ class Trip < ApplicationRecord
   has_one :host, class_name: "User", through: :listing
   belongs_to :guest, class_name: "User"
 
+  has_one :review
+
   def duration
     (checkout - checkin).to_i
   end
