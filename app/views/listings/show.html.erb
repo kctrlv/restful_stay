@@ -14,8 +14,8 @@
     <div class="col-md-6">
       <div class="dates_available">
         <h3>Dates available: </h3>
-        <div class='col-md-8' id='datepickers'>
-          <%= text_field_tag "booking[availabledates]", Time.now.strftime('%Y-%m-%d'), id: "datepicker1" %>
+        <div id='datepickers'>
+          <%= text_field_tag "booking[availabledates]", Time.now.strftime('%Y-%m-%e'), id: "datepicker1" %>
         </div>
       </div>
     </div>
