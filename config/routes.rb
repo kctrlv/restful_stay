@@ -27,6 +27,13 @@ Rails.application.routes.draw do
 
   get 'reservations', to: 'reservations#index', as: "reservations"
 
+namespace :api do
+  namespace :v1 do
+    get 'availabledates/:id', to: 'availabledates#index', as: 'availabledates'
+  end
+end
+
+
   namespace :admin do
     get 'dashboard', to: "dashboard#index", as: "dashboard"
     get 'dashboard/manage_users', to: "users#index", as: "manage_users"
