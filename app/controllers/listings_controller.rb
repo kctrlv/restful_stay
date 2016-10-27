@@ -41,7 +41,7 @@ class ListingsController < ApplicationController
   end
 
   def destroy
-    @listing  = Listing.find(params[:id])
+    @listing = Listing.find(params[:id])
     @listing.clear_listing_days
     @listing.destroy
     flash[:success] = "Listing deleted successfully"
@@ -49,19 +49,38 @@ class ListingsController < ApplicationController
   end
 
   private
+
   def listing_params
-    params.require(:listing).permit(:name, :image_url, :city_id, :description, :price_per_night, :start_date, :end_date)
+    params.require(:listing).permit(
+      :name,
+      :image_url,
+      :city_id,
+      :description,
+      :price_per_night,
+      :start_date,
+      :end_date
+    )
   end
 
   def updated_params
-    params.require(:listing).permit(:name, :image_url, :city_id, :description, :price_per_night)
+    params.require(:listing).permit(
+      :name,
+      :image_url,
+      :city_id,
+      :description,
+      :price_per_night
+    )
   end
 
   def wrong_dates(listing)
     if params[:action] == "update"
-      redirect_to edit_listing_path(@listing), flash: {warning: "Please make sure the end date comes after the start date"}
+      redirect_to edit_listing_path(listing), flash: {
+        warning: "Please make sure the end date comes after the start date"
+      }
     else
-      redirect_to new_listing_path, flash: {warning: "Please make sure the end date comes after the start date"}
+      redirect_to new_listing_path, flash: {
+        warning: "Please make sure the end date comes after the start date"
+      }
     end
   end
 end

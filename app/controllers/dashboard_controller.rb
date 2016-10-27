@@ -2,15 +2,11 @@ class DashboardController < ApplicationController
   before_action :confirm!
 
   def index
-    if current_user
-      @user = current_user
-    end
+    @user = current_user if current_user
     @trips = current_user.trips
   end
 
   def edit
-    if current_user
-      @user = current_user
-    end
+    @user = current_user if current_user
   end
 end

@@ -27,10 +27,14 @@ class TripsController < ApplicationController
   end
 
   def wrong_dates
-    redirect_to new_trip_path(listing: trip_params[:listing_id]), flash: {warning: "Please make sure your checkout date comes after the checkin date"}
+    redirect_to new_trip_path(listing: trip_params[:listing_id]), flash: {
+      warning: "Please make sure your checkout date comes after the checkin date"
+    }
   end
 
   def dates_already_booked
-    redirect_to new_trip_path(listing: trip_params[:listing_id]), flash: {warning: "Dates within your selection have already been booked"}
+    redirect_to new_trip_path(listing: trip_params[:listing_id]), flash: {
+      warning: "Dates within your selection have already been booked"
+    }
   end
 end

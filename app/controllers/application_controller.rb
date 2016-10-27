@@ -12,24 +12,22 @@ class ApplicationController < ActionController::Base
   end
 
   def current_permission
-    @current_permission ||= PermissionService.new(user: current_user,
-                                                  controller: params[:controller],
-                                                  action: params[:action])
+    @current_permission ||= PermissionService.new(
+      user: current_user,
+      controller: params[:controller],
+      action: params[:action]
+    )
   end
 
   def authorize!
-    unless current_permission.authorized?
-      render_404
-    end
+    render_404 unless current_permission.authorized?
   end
 
   def confirm!
-    if current_user.status == 'inactive'
-      redirect_to confirmation_path
-    end
+    redirect_to confirmation_path if current_user.status == 'inactive'
   end
 
   def render_404
-    render :file => "#{Rails.root}/public/404.html",  :status => 404
+    render file: "#{Rails.root}/public/404.html", status: 404
   end
 end

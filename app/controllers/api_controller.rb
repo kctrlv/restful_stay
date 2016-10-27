@@ -27,7 +27,8 @@ class ApiController < ActionController::API
   def remake_params
     unless params[:utf8].nil?
       if params['review']
-        @web_params = params.require("review").merge(web: true).merge(trip_id: params[:trip_id])
+        @web_params = params.require("review").merge(web: true)
+                            .merge(trip_id: params[:trip_id])
       else
         @web_params = params.merge(web: true)
       end

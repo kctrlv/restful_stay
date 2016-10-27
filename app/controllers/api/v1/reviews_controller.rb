@@ -19,7 +19,7 @@ class Api::V1::ReviewsController < ApiController
     if @review
       render json: Review.find_by(trip_id: params[:trip_id])
     else
-      render json: { error: "No Review for this Trip"}, status: :not_found
+      render json: { error: "No Review for this Trip" }, status: :not_found
     end
   end
 
@@ -31,7 +31,7 @@ class Api::V1::ReviewsController < ApiController
       render json: { body: "Your review has been removed" }
     else
       return redirect_to trips_path if @web
-      render json: { error: "No Review for this Trip"}, status: :not_found
+      render json: { error: "No Review for this Trip" }, status: :not_found
     end
   end
 
@@ -50,7 +50,8 @@ class Api::V1::ReviewsController < ApiController
 
   def review_params
     if @web_params
-      params.require(:review).permit(:subject, :body).merge(trip_id: params[:trip_id])
+      params.require(:review).permit(:subject, :body)
+            .merge(trip_id: params[:trip_id])
     else
       params.permit(:subject, :body, :trip_id)
     end
@@ -58,7 +59,9 @@ class Api::V1::ReviewsController < ApiController
 
   def authorize
     unless trip_exists && trip_belongs_to_user
-      return not_found_error("Unauthorized: You cannot review a trip that you have not booked")
+      return not_found_error(
+        "Unauthorized: You cannot review a trip that you have not booked"
+      )
     end
   end
 
@@ -71,8 +74,6 @@ class Api::V1::ReviewsController < ApiController
   end
 
   def set_web
-    if @web_params
-      @web = @web_params.delete('web')
-    end
+    @web = @web_params.delete('web') if @web_params
   end
 end
