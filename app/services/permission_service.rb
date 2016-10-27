@@ -25,12 +25,17 @@ class PermissionService
     attr_reader :user, :controller, :action
 
     def admin_permissions
+      return true if controller == 'admin/dashboard' && action.in?(%w(index))
+      return true if controller == 'admin/users' && action.in?(%w(index edit update))
+      return true if controller == 'admin/listings' && action.in?(%w(index show destroy))
+      return true if controller == 'admin/cities' && action.in?(%w(index show destroy new create))
       return host_permissions
     end
 
     def host_permissions
       # return true if controller == 'orders' && action.in?(%w(index show))
       return true if controller == 'listings' && action.in?(%w(index new create show edit update destroy))
+      return true if controller == 'reservations' && action.in?(%w(index))
       return traveler_permissions
     end
 
@@ -38,6 +43,8 @@ class PermissionService
       return true if controller == 'dashboard' && action.in?(%w(index edit))
       return true if controller == 'userroles' && action.in?(%w(create))
       return true if controller == 'users' && action.in?(%w(update edit))
+      return true if controller == 'trips' && action.in?(%w(index new create))
+      return true if controller == 'reviews' && action.in?(%w(new show edit create update destroy))
       return guest_permissions
     end
 
@@ -49,7 +56,6 @@ class PermissionService
       return true if controller == 'confirmation' && action.in?(%w(new create))
       return true if controller == 'cities' && action.in?(%w(show))
       return true if controller == 'listings' && action.in?(%w(show))
-
     end
-
+  #-private
 end

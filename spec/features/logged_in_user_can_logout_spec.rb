@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature "User logs in and out" do
-  scenario "user can log out" do
+  scenario "user can log in" do
     # As a registered user
     user = create(:user)
     #When I visit the homepage
@@ -21,7 +21,6 @@ RSpec.feature "User logs in and out" do
     within(".navbar") do
       expect(page).to have_content("#{user.first_name}")
       expect(page).to have_content("Trips")
-      expect(page).to have_content("Messages")
       expect(page).to have_content("Logout")
     end
   end

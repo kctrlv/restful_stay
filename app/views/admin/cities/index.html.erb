@@ -1,0 +1,16 @@
+<h1>Manage Cities</h1>
+
+<%= link_to "Add City", admin_new_city_path %>
+
+<table style="width:100%">
+  <tr>
+    <th>Display City</th>
+    <th>Name</th>
+  </tr>
+  <% @cities.each do |city| %>
+  <tr>
+    <td><%= link_to city.id, admin_show_city_path(city.id) %></td>
+    <td><%= city.name %></td>
+  </tr>
+  <% end %>
+</table>

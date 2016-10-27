@@ -31,7 +31,6 @@ RSpec.feature "An existing user can login" do
 #  And I expect to see my first name in the navbar
     within(".navbar") do
       expect(page).to have_content("Trips")
-      expect(page).to have_content("Messages")
       expect(page).to have_content("#{user.first_name}")
     end
   end

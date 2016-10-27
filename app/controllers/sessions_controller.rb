@@ -6,10 +6,10 @@ class SessionsController < ApplicationController
     user = User.find_by(email_address: params[:session][:email_address])
     if user && user.authenticate(params[:session][:password])
       session[:user_id] = user.id
-      if user.inactive?
-        redirect_to confirmation_path
+      if user.inactive? || user.suspended?
+        path_based_on_status
       else
-        redirect_to root_path
+        path_based_on_role
       end
     else
       flash.now[:danger] = "Email and/or Password is invalid, please try again."
