@@ -2,6 +2,8 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 class Seed
+  NUM_USERS = 300
+
   def self.start
     UserRole.delete_all
     User.delete_all
@@ -14,6 +16,8 @@ class Seed
     generate_cities
     generate_days
     generate_listings
+    generate_trips_and_reviews
+    generate_clancey_admin
   end
 
   def self.generate_days
@@ -67,6 +71,21 @@ class Seed
     puts "Created Users: #{users.join(', ')}"
     assign_roles
     generate_additional_hosts
+    generate_many_users
+  end
+
+  def self.generate_clancey_admin
+    clancey = User.create(
+      first_name: "Chad",
+      last_name:  "Clancey",
+      email_address: "clancey007@example.com",
+      phone_number: "+10000000000",
+      password: 'password',
+      status: 'active'
+    )
+    clancey.roles << Role.find_by(name: 'traveler')
+    clancey.roles << Role.find_by(name: 'host')
+    clancey.roles << Role.find_by(name: 'admin')
   end
 
   def self.generate_additional_hosts
@@ -83,6 +102,19 @@ class Seed
     end
   end
 
+  def self.generate_many_users
+    (1..NUM_USERS).each do |num|
+      u = User.create(
+        first_name: "User#{num}",
+        last_name:  "Johnson",
+        email_address: "user#{num}@restfulstay.com",
+        phone_number: "+15555555555",
+        password: "user#{num}",
+        status: 'active')
+      u.roles << Role.find_by(name: 'traveler')
+    end
+  end
+
   def self.generate_listings
     city_hosts = User.all[4..9]
     city_hosts.each_with_index do |city_host, index|
@@ -94,6 +126,24 @@ class Seed
                       city_id: index+1,
                       start_date: Day.all[rand(1..10)].id,
                       end_date: Day.all[rand(11..20)].id }, city_host.id).save
+      end
+    end
+  end
+
+  def self.generate_trips_and_reviews
+    city_hosts = User.all[4..9]
+    city_hosts.each do |host|
+      host.listings.each do |host_listing|
+        t = User.find(rand(NUM_USERS)).trips.create(
+          listing: host_listing,
+          checkin: host_listing.days[0].date,
+          checkout: host_listing.days[1].date
+        )
+        Review.create(
+          trip: t,
+          subject: Faker::ChuckNorris.fact,
+          body: Faker::Lorem.paragraph
+        )
       end
     end
   end
