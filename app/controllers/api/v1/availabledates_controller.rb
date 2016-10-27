@@ -3,7 +3,9 @@ class Api::V1::AvailabledatesController < ApplicationController
   skip_before_action :authorize!
 
   def index
-    respond_with Listing.find(params[:id]).available_days
-
+    @dates = Listing.find(params[:id]).available_days.map do |date_object|
+      date_object.date.strftime('%Y-%m-%-d')
+    end
+    respond_with @dates
   end
 end
