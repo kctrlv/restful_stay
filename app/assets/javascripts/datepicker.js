@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  let booking;
+  var booking;
   fetchDates()
 
 
@@ -16,7 +16,6 @@ $(document).ready(function() {
       type: 'GET',
       success: (response) => {
         booking = response
-        console.log(response)
       }
     })
   }
