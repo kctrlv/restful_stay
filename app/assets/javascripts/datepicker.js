@@ -2,6 +2,7 @@ $(document).ready(function() {
   let booking;
   fetchDates()
 
+
   $( function() {
     $('#datepicker1').datepicker({
       beforeShowDay: checkAvailability,
