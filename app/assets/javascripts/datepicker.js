@@ -12,7 +12,7 @@ $(document).ready(function() {
   function fetchDates() {
     var listingId = getID();
     $.ajax({
-      url: `http://localhost:3000/api/v1/availabledates/${listingId}`,
+      url: `http://restful-stay.herokuapp.com/api/v1/availabledates/${listingId}`,
       type: 'GET',
       success: (response) => {
         booking = response
