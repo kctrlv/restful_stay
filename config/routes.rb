@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create]
   resources :listings, only: [:index, :new, :create, :show, :edit, :update, :destroy]
   resources :cities, param: :city_name, only: [:show]
-  resources :trips, only: [:index, :new, :create]
+  resources :trips, only: [:index, :new, :create] do
+    resource :review, only: [:show, :new, :edit]
+  end
   resources :userroles, only: [:create]
 
   namespace :api do

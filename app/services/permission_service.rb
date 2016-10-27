@@ -39,6 +39,7 @@ class PermissionService
       return true if controller == 'userroles' && action.in?(%w(create))
       return true if controller == 'users' && action.in?(%w(update edit))
       return true if controller == 'trips' && action.in?(%w(index new create))
+      return true if controller == 'reviews' && action.in?(%w(new show edit create update destroy))
       return guest_permissions
     end
 

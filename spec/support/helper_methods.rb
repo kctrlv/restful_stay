@@ -82,3 +82,9 @@ def traveler_leaves_review
    }
   post "/api/v1/trips/#{traveler.trips.first.id}/review", params: parameters
 end
+
+def traveler_leaves_a_review_for_denverhost
+  Review.create(trip: User.find_by(first_name: "Traveler").trips.first,
+                body: "This was a good place",
+                subject: "Top-Notch Hosting")
+end
