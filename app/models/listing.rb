@@ -6,6 +6,7 @@ class Listing < ApplicationRecord
   validates_presence_of :description
   validates_presence_of :price_per_night
 
+  has_many :trips
   has_many :listing_days
   has_many :days, through: :listing_days
   # scope :available_days, -> { listing_days.where(status: 'available') }
