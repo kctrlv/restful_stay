@@ -16,7 +16,7 @@ RSpec.feature "Traveler Can View and Edit Their Profile" do
     click_on "login-button"
 
     # When I click on "My name"
-    click_on "#{user.first_name}"
+    click_on user.first_name
     # I expect my path to be "/dashboard"
     expect(current_path).to eq('/dashboard')
     # I expect to see my api key
@@ -57,7 +57,7 @@ RSpec.feature "Traveler Can View and Edit Their Profile" do
     click_on "login-button"
 
     # When I click on "My name"
-    click_on "#{user.first_name}"
+    click_on user.first_name
     # I expect my path to be "/dashboard"
     expect(current_path).to eq('/dashboard')
 
@@ -88,9 +88,9 @@ RSpec.feature "Traveler Can View and Edit Their Profile" do
     fill_in "Email", with: user.email_address
     fill_in "Password", with: user.password
     click_on "login-button"
-
+    
     # When I click on "My name"
-    click_on "#{user.first_name}"
+    click_on user.first_name
     # I expect my path to be "/dashboard"
     expect(current_path).to eq('/dashboard')
 

@@ -89,10 +89,9 @@ RSpec.feature "Traveler Books Room" do
     expect(page).to have_content("Please make sure your checkout date comes after the checkin date")
   end
 
-
   scenario "traveler cannot book an already-booked listing" do
     login_as_traveler
-    trip = book_trip_for_listing
+    book_trip_for_listing
 
     visit('/')
     click_link "Denver"

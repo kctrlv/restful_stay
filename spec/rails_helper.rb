@@ -10,10 +10,10 @@ require 'simplecov'
 require 'capybara/rspec'
 
 SimpleCov.start 'rails' do
-    add_filter "/app/channels"
-    add_filter "/app/jobs"
-    add_filter "/app/mailers"
-    add_filter "/app/helpers"
+  add_filter "/app/channels"
+  add_filter "/app/jobs"
+  add_filter "/app/mailers"
+  add_filter "/app/helpers"
 end
 
 VCR.configure do |config|
@@ -29,13 +29,11 @@ Shoulda::Matchers.configure do |config|
   end
 end
 
-
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
-
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)
   end
@@ -55,9 +53,6 @@ RSpec.configure do |config|
   config.before(:suite) do
     Rails.application.load_seed # loading seeds
   end
-
-
-
 
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 

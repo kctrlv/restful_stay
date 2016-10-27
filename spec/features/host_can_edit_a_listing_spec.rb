@@ -21,8 +21,8 @@ RSpec.feature "Host can edit listing" do
     # I expect to see a link/button next to each listing to "Edit Listing"
     # I expect to see a link/button next to each listing to "Remove Listing"
     within(".listings") do
-      expect(page).to have_link("#{listing1.name}")
-      expect(page).to have_link("#{listing2.name}")
+      expect(page).to have_link(listing1.name)
+      expect(page).to have_link(listing2.name)
     end
 
     # When I click on "Edit Listing" next to a current listing
@@ -78,8 +78,8 @@ RSpec.feature "Host can edit listing" do
     # I expect to see a link/button next to each listing to "Edit Listing"
     # I expect to see a link/button next to each listing to "Remove Listing"
     within(".listings") do
-      expect(page).to have_link("#{listing1.name}")
-      expect(page).to have_link("#{listing2.name}")
+      expect(page).to have_link(listing1.name)
+      expect(page).to have_link(listing2.name)
     end
 
     # When I click on "Edit Listing" next to a current listing
@@ -134,8 +134,8 @@ RSpec.feature "Host can edit listing" do
     # I expect to see a link/button next to each listing to "Edit Listing"
     # I expect to see a link/button next to each listing to "Remove Listing"
     within(".listings") do
-      expect(page).to have_link("#{listing1.name}")
-      expect(page).to have_link("#{listing2.name}")
+      expect(page).to have_link(listing1.name)
+      expect(page).to have_link(listing2.name)
     end
 
     # When I click on "Edit Listing" next to a current listing

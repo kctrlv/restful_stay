@@ -27,7 +27,7 @@ RSpec.feature "Visitor can activate account" do
   scenario "inactive user cannot confirm with wrong code" do
     VCR.use_cassette("confirmation_code") do
       # As an inactive user
-      user = create(:user, verification_code: 540958)
+      user = create(:user, verification_code: 540_958)
       # when I visit homepage
       visit '/'
       # and I click link to "Login"
@@ -62,7 +62,7 @@ RSpec.feature "Visitor can activate account" do
   scenario "inactive user can confirm with two-factor auth" do
     VCR.use_cassette("confirmation_code") do
       # As an inactive user
-      user = create(:user, verification_code: 540958)
+      user = create(:user, verification_code: 540_958)
       # when I visit homepage
       visit '/'
       # and I click link to "Login"

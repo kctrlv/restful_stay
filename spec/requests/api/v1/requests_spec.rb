@@ -9,7 +9,7 @@ describe 'Traveler API' do
   end
 
   it 'returns 404 when provided an invalid api key' do
-    parameters = { api_key: 'nonexistent_key'}
+    parameters = { api_key: 'nonexistent_key' }
     get "/api/v1/trips", params: parameters
     res = JSON.parse(response.body, symbolize_names: true)
     expect(response.status).to eq(404)
@@ -47,13 +47,12 @@ describe 'Traveler API' do
       api_key: traveler.api_key,
       subject: "This was a great place!",
       body: "I had such a good time, denverhost is such a good guy. And his cat was soft."
-     }
+    }
     post "/api/v1/trips/100/review", params: parameters
     expect(response.status).to eq(404)
     res = JSON.parse(response.body, symbolize_names: true)
     expect(res[:error]).to eq("Unauthorized: You cannot review a trip that you have not booked")
   end
-
 
   it 'can leave a review for a trip' do
     traveler = User.find_by(first_name: "Traveler")
@@ -63,7 +62,7 @@ describe 'Traveler API' do
       api_key: traveler.api_key,
       subject: "This was a great place!",
       body: "I had such a good time, denverhost is such a good guy. And his cat was soft."
-     }
+    }
 
     post "/api/v1/trips/#{traveler.trips.first.id}/review", params: parameters
     expect(response).to be_success
@@ -78,7 +77,7 @@ describe 'Traveler API' do
     parameters = {
       api_key: traveler.api_key,
       body: "I had such a good time, denverhost is such a good guy. And his cat was soft."
-     }
+    }
 
     post "/api/v1/trips/#{traveler.trips.first.id}/review", params: parameters
     expect(response.status).to eq(404)
@@ -93,7 +92,7 @@ describe 'Traveler API' do
     parameters = {
       api_key: traveler.api_key,
       subject: "This was a great place!"
-     }
+    }
 
     post "/api/v1/trips/#{traveler.trips.first.id}/review", params: parameters
     expect(response.status).to eq(404)
@@ -157,7 +156,7 @@ describe 'Traveler API' do
       api_key: traveler.api_key,
       subject: "I'm blind!",
       body: "I changed my mind! His cat scratched my eye in my sleep."
-     }
+    }
 
     put "/api/v1/trips/#{traveler.trips.first.id}/review", params: parameters
     expect(response).to be_success
@@ -172,7 +171,4 @@ describe 'Traveler API' do
     expect(res[:body]).to eq("I changed my mind! His cat scratched my eye in my sleep.")
     expect(res[:subject]).to eq("I'm blind!")
   end
-
-
-
 end
