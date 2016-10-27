@@ -2,20 +2,6 @@
   <a href="/" class='navbar-brand'>RESTful_stay</a>
     <div class="container-fluid">
       <ul class="nav navbar-nav navbar-right">
-        <!-- <div class="dropdown">
-          <button class="btn btn-default dropdown-toggle" type="button" id="cities" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-            <li><a href="#">Colorado Springs</a></li>
-            <li><a href="#">Denver</a></li>
-            <li><a href="#">Boulder</a></li>
-            <li><a href="#">Grand Junction</a></li>
-            <li><a href="#">Fort Collins</a></li>
-            <li><a href="#">Estes Park</a></li>
-          </ul>
-        </div> -->
         <% if current_user && current_user.host? %>
           <li> <%= link_to "Listings", listings_path %> </li>
           <li> <%= link_to "Trips", trips_path %> </li>

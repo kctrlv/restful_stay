@@ -14,29 +14,27 @@
     <div class="col-md-6">
       <div class="dates_available">
         <h3>Dates available: </h3>
-        <% @listing.available_days.each do |day| %>
-        <div class="date">
-          <p> <%= day.date %> </p>
-        </div>
-        <% end %>
-      </div>
-    </div>
-    </div>
-    <div class="row text-center">
-      <div class="jumbotron about_host">
-        <h3>About this host: </h3>
-        <div class="img-thumbnail center-block">
-          <%= image_tag @listing.host.picture_url %>
-        </div>
-        <div class="inline-block">
-          <%= @listing.host.first_name %>
-          <%= @listing.host.description %>
+        <div class='col-md-8' id='datepickers'>
+          <%= text_field_tag "booking[availabledates]", Time.now.strftime('%Y-%m-%d'), id: "datepicker1" %>
         </div>
       </div>
     </div>
-    <% if current_user %>
-      <div class="row text-center">
-        <h3><%= link_to "Book this Listing", new_trip_path(listing: @listing) %></h3>
+  </div>
+  <div class="row text-center">
+    <div class="jumbotron about_host">
+      <h3>About this host: </h3>
+      <div class="img-thumbnail center-block">
+        <%= image_tag @listing.host.picture_url %>
       </div>
-    <% end %>
+      <div class="inline-block">
+        <%= @listing.host.first_name %>
+        <%= @listing.host.description %>
+      </div>
+    </div>
+  </div>
+  <% if current_user %>
+  <div class="row text-center">
+    <h3><%= link_to "Book this Listing", new_trip_path(listing: @listing) %></h3>
+  </div>
+  <% end %>
 </div>
