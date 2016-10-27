@@ -2,6 +2,7 @@ $(document).ready(function() {
   let booking;
   fetchDates()
 
+
   $( function() {
     $('#datepicker1').datepicker({
       beforeShowDay: checkAvailability,
@@ -9,8 +10,9 @@ $(document).ready(function() {
   });
 
   function fetchDates() {
+    var listingId = getID();
     $.ajax({
-      url: `http://localhost:3000/api/v1/availabledates/2`,
+      url: `http://localhost:3000/api/v1/availabledates/${listingId}`,
       type: 'GET',
       success: (response) => {
         booking = response
@@ -21,7 +23,7 @@ $(document).ready(function() {
 
   function checkAvailability(date) {
     var availableDays = booking.map(function(day) {
-      return day.date
+      return day
     })
     var y = date.getFullYear();
     var m = date.getMonth();
@@ -36,6 +38,6 @@ $(document).ready(function() {
   }
 
   function getID() {
-    return window.location.pathname.split('-').slice(-1).toString();
+    return window.location.pathname.split('/').slice(-1).toString();
   }
 })
